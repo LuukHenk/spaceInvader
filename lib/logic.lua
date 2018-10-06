@@ -25,7 +25,7 @@ function createPlayer()
 	player.width  = player.outlines['right'] - player.outlines['left']
 	player.height = player.outlines['down']  - player.outlines['up']
 
-	player.bulletSpeed = -200
+	player.bulletSpeed = -300
 	player.bulletDevX  = 6
 	player.bulletDevY  = 0
 

@@ -1,18 +1,28 @@
-
+--to do
+-- verder werken aan main menu (eerst menu text toevoegen aan loader en vervolgens de draw makemn)
+--
 love.window.setFullscreen(true, 'desktop')
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 local graph = require 'loader'
 local game	= require 'game'
 local draw  = require 'draw'
+local logic = require 'lib/logic'
+local menus = require 'menus'
 
 local screenWidth	 = love.graphics.getWidth()
 local screenHeight = love.graphics.getHeight()
 
-local status = 'game'
+local previousScreenStatus = nil
+local screenStatus = 'mainScreen'
+--main menu
+--pause menu
+--game menu
+
 local pauseStatus = 'resume'
+local menuStatus  = 'play'
 
-
+local currentKey = nil
 ------------------------------------------------------------------------
 --    Original Author run function: https://github.com/Leandros
 --		Updated Author run function: https://github.com/jakebesworth
@@ -73,36 +83,70 @@ end
 ----------------------------------------------------------
 
 function love.load()
-	if status == 'game' then
-		graph.sounds.gameMusic:play()
-		game.load(screenWidth, screenHeight)
+	if screenStatus == 'gameScreen' then
+		game.load(screenWidth, screenHeight, graph.sounds.gameMusic)
 	end
+end
+
+function love.keypressed(key)
+	if key ~= currentKey then
+		currentKey = key
+	end
+end
+
+function love.keyreleased(key)
+	currentKey = nil
 end
 
 function love.update(dt)
-	if love.keyboard.isDown(graph.keybinds.escape) then love.event.quit() end
-	if status == 'game' then
-		status = game.play(dt, graph, screenWidth, screenHeight)
-	end
+	if previousScreenStatus == 'mainScreen' and screenStatus == 'gameScreen' then love.load() end
+	previousScreenStatus = screenStatus
 
-	if status == 'pause' then
-		pauseStatus = game.pauseStatus(graph.keybinds, pauseStatus)
-		status = game.pauseAction(graph.keybinds, pauseStatus)
-	end
+	if screenStatus == 'gameScreen' then
+		screenStatus = game.play(dt, graph, screenWidth, screenHeight)
+		if currentKey == graph.keybinds.escape then screenStatus = 'pauseScreen' end
+
+	elseif screenStatus == 'pauseScreen' then
+		pauseStatus  = menus.pauseStatus(currentKey, graph.keybinds, pauseStatus)
+		screenStatus = menus.pauseAction(currentKey, graph.keybinds, pauseStatus)
+
+	elseif screenStatus == 'mainScreen' then
+		menuStatus   = menus.mainStatus(currentKey, graph.keybinds, menuStatus)
+		screenStatus = menus.mainAction(currentKey, graph.keybinds, menuStatus)
+
+	elseif screenStatus == 'quitGame' then love.event.quit() end
+
 end
 
 function love.draw()
-	if status == 'lost' then
-		draw.screen(graph.background, graph.text.lost)
+	if screenStatus == 'gameScreen' then
+		draw.game(graph, game.levels[game.currentLevel], game.players, game.bullets)
 
-	elseif status == 'won' then
-		draw.screen(graph.background, graph.text.win)
+	elseif screenStatus == 'pauseScreen' then
+		draw.pause(graph.background, graph.text.pause, pauseStatus)
 
-	elseif status == 'game' then
-		draw.game(graph.background, game.pC, game.players, game.eC, game.enemies)
-
-	elseif status == 'pause' then
-
+	elseif screenStatus == 'mainScreen' then
+		draw.main(graph.background, graph.text.main, menuStatus)
 	end
-	--love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+
+
+
+
+
+
+	--developer mode
+--	love.graphics.setColor(1, 1, 1)
+--	love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+
+--	love.graphics.rectangle('fill', screenWidth/2, 0, 1, screenHeight)
+end
+
+function showTable(table)
+	for index, data in ipairs(table) do
+		print(index)
+
+		for key, value in pairs(data) do
+			print('\t', key, value)
+		end
+	end
 end
