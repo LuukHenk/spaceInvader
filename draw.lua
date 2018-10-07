@@ -12,7 +12,6 @@ function draw.pause(background, text, status)
 	drawBackground(background)
 	for _, t in pairs(text) do
 		if t.mode == status then
---			t.scaleY = t.focus
 			love.graphics.setColor(1, 0, 1)
 			love.graphics.print(t.str, t.x, t.y, t.scaleX, t.scaleY)
 		else

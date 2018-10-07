@@ -85,7 +85,7 @@ function currentScreenStatus(keybinds, screenHeight, totalPlayers, dieSound, ene
 	if #enemies == 0 then
 		game.bullets = {}
 		if tonumber(game.currentLevel) == game.maxLevel then
-			return 'winningScreen'
+			return 'mainScreen'
 		else
 			game.currentLevel = tostring(tonumber(game.currentLevel) + 1)
 			return 'gameScreen'
@@ -93,15 +93,14 @@ function currentScreenStatus(keybinds, screenHeight, totalPlayers, dieSound, ene
 
 	elseif totalPlayers == 0 then
 		dieSound:play()
-		return 'losingScreen'
+		return 'mainScreen'
 
 	else
 		for _,enemy in pairs(enemies) do
 			if enemy.y >= screenHeight - 90 then
 				dieSound:play()
-				return 'losingScreen'
+				return 'mainScreen'
 
-			elseif love.keyboard.isDown(keybinds.pause) then return 'pauseScreen'
 			else return 'gameScreen' end
 		end
 	end

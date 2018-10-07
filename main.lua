@@ -7,7 +7,6 @@ love.graphics.setDefaultFilter('nearest', 'nearest')
 local graph = require 'loader'
 local game	= require 'game'
 local draw  = require 'draw'
-local logic = require 'lib/logic'
 local menus = require 'menus'
 
 local screenWidth	 = love.graphics.getWidth()
@@ -114,8 +113,9 @@ function love.update(dt)
 		menuStatus   = menus.mainStatus(currentKey, graph.keybinds, menuStatus)
 		screenStatus = menus.mainAction(currentKey, graph.keybinds, menuStatus)
 
-	elseif screenStatus == 'quitGame' then love.event.quit() end
+	elseif screenStatus == 'quitGame' then love.event.quit()
 
+	else screenStatus = 'mainScreen' end
 end
 
 function love.draw()

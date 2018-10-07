@@ -165,7 +165,7 @@ normal.imageScaleX = 0
 normal.imageScaleY = 8
 normal.image       = love.graphics.newImage('images/enemy.png')
 normal.fireSound   = love.audio.newSource('sounds/Randomize4.wav', 'static')
-normal.dieSound  = love.audio.newSource('sounds/Randomize.wav', 'static')
+normal.dieSound    = love.audio.newSource('sounds/Randomize.wav', 'static')
 
 setup.objects['normal'] = normal
 
