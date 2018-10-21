@@ -1,27 +1,56 @@
---to do
--- verder werken aan main menu (eerst menu text toevoegen aan loader en vervolgens de draw makemn)
+--BUGS-----
 --
-love.window.setFullscreen(true, 'desktop')
+	--overal moet previousscreenstatus voor de screenstatus geladen worden. hierdoor crasht hij soms ook:
+-- Error: game.lua:32: bad argument #1 to 'pairs' (table expected, got nil)
+-- stack traceback:
+-- 	[string "boot.lua"]:637: in function <[string "boot.lua"]:633>
+-- 	[C]: in function 'pairs'
+-- 	game.lua:32: in function 'play'
+-- 	main.lua:123: in function 'update'
+-- 	main.lua:73: in function <main.lua:53>
+-- 	[C]: in function 'xpcall'
+--
+--TO DO------
+--
+-- image scaling aanpassen
+-- settings video toevoegen
+-- background en evt images zelf tekenen in lua
+	-- plaatje voor main menu en settings menu maken
+	-- knipperende sterren maken en een draaiende maan
+-- settings keybinds maken
+--
+-- hoe werkt de run
+--
+--
+--
+--SETTINGS-----
+--
+love.window.setFullscreen(true, 'desktop')					 --set gamescreen full screen
+love.graphics.setDefaultFilter('nearest', 'nearest') --default image filter
 
-love.graphics.setDefaultFilter('nearest', 'nearest')
-local graph = require 'loader'
-local game	= require 'game'
-local draw  = require 'draw'
-local menus = require 'menus'
+local graph    = require 'loader'      --get graphics and sounds
+local game     = require 'game'				--load game functions
+local draw     = require 'draw'				--load draw function
+local menus    = require 'menus'				--load menu functions
+local settings = require 'settings' --load settings functions
 
-local screenWidth	 = love.graphics.getWidth()
-local screenHeight = love.graphics.getHeight()
+local screenWidth	 = love.graphics.getWidth()  --total pixels in width
+local screenHeight = love.graphics.getHeight() --total pixels in height
 
+local currentKey = nil --current keypress
+
+--previous screens
+local preSS = nil
 local previousScreenStatus = nil
-local screenStatus = 'mainScreen'
---main menu
---pause menu
---game menu
 
-local pauseStatus = 'resume'
-local menuStatus  = 'play'
+--current screen
+local screenStatus = 'mainScreen' --mainScreen, pauseScreen, settingsScreen, gameScreen
 
-local currentKey = nil
+--current statussus in screens
+local mainStatus     = 'play'   --play, settings, quit
+local settingsStatus = 'audio'  --audio, video, keybinds
+local pauseStatus    = 'resume' --quit, resume, settings
+
 ------------------------------------------------------------------------
 --    Original Author run function: https://github.com/Leandros
 --		Updated Author run function: https://github.com/jakebesworth
@@ -82,40 +111,70 @@ end
 ----------------------------------------------------------
 
 function love.load()
-	if screenStatus == 'gameScreen' then
-		game.load(screenWidth, screenHeight, graph.sounds.gameMusic)
-	end
+	settings.setVolume(graph) --set volume
+	-- curve = love.math.newBezierCurve({25, 25, 75, 50, 125, 25})
 end
 
-function love.keypressed(key)
+function love.keypressed(key) --check key press
 	if key ~= currentKey then
 		currentKey = key
 	end
 end
 
-function love.keyreleased(key)
+function love.keyreleased(key) --check key release
 	currentKey = nil
 end
 
+
 function love.update(dt)
-	if previousScreenStatus == 'mainScreen' and screenStatus == 'gameScreen' then love.load() end
-	previousScreenStatus = screenStatus
+	----
+	if screenStatus == 'mainScreen' then
+		graph.gameMusic:stop()
 
-	if screenStatus == 'gameScreen' then
-		screenStatus = game.play(dt, graph, screenWidth, screenHeight)
-		if currentKey == graph.keybinds.escape then screenStatus = 'pauseScreen' end
+		--update selected in main menu
+		mainStatus   = menus.mainStatus(currentKey, graph.keybinds, mainStatus)
 
+		--update screenStatus
+		previousScreenStatus = 'mainScreen'
+		screenStatus = menus.mainAction(currentKey, graph.keybinds, mainStatus)
+
+	-----
 	elseif screenStatus == 'pauseScreen' then
+		--update selected in pause menu
 		pauseStatus  = menus.pauseStatus(currentKey, graph.keybinds, pauseStatus)
+
+		--update screenStatus
+		previousScreenStatus = screenStatus
 		screenStatus = menus.pauseAction(currentKey, graph.keybinds, pauseStatus)
 
-	elseif screenStatus == 'mainScreen' then
-		menuStatus   = menus.mainStatus(currentKey, graph.keybinds, menuStatus)
-		screenStatus = menus.mainAction(currentKey, graph.keybinds, menuStatus)
+	-----
+	elseif screenStatus == 'gameScreen' then
+		--play music if previous game
+		if previousScreenStatus == 'mainScreen' then
+			graph.gameMusic:play()
+			game.load(screenWidth, screenHeight) end
+
+		previousScreenStatus = screenStatus
+		screenStatus = game.play(dt, graph, screenWidth, screenHeight)
+
+		if currentKey == graph.keybinds.escape then screenStatus = 'pauseScreen' end
+
+
+	elseif screenStatus == 'settingsScreen' then
+		settingsStatus = menus.settingsStatus(currentKey, graph.keybinds, settingsStatus)
+		settingsText   = settings.settingsAction(currentKey, graph, settingsStatus)
+
+		if screenStatus ~= previousScreenStatus then
+			preSS = previousScreenStatus
+			if preSS == 'pauseScreen' then pauseStatus = 'resume'	end
+		end
+		previousScreenStatus = screenStatus
+		screenStatus = menus.settingsAction(currentKey, graph.keybinds, preSS, settingsStatus)
 
 	elseif screenStatus == 'quitGame' then love.event.quit()
 
 	else screenStatus = 'mainScreen' end
+
 end
 
 function love.draw()
@@ -123,18 +182,24 @@ function love.draw()
 		draw.game(graph, game.levels[game.currentLevel], game.players, game.bullets)
 
 	elseif screenStatus == 'pauseScreen' then
-		draw.pause(graph.background, graph.text.pause, pauseStatus)
+		draw.screen(graph.background, graph.fontImage, graph.text[screenStatus], pauseStatus,
+								screenWidth)
 
 	elseif screenStatus == 'mainScreen' then
-		draw.main(graph.background, graph.text.main, menuStatus)
+		draw.screen(graph.background, graph.fontImage, graph.text[screenStatus], mainStatus,
+								screenWidth)
+
+	elseif screenStatus == 'settingsScreen' then
+		draw.screen(graph.background, graph.fontImage, graph.text[screenStatus], settingsStatus,
+								screenWidth)
+		draw.text(settings.text['volume'], graph.fontImage, settingsStatus, screenWidth)
+		--draw.settings(graph.background, graph.text.settings, settingsStatus)
 	end
 
-
-
-
-
-
 	--developer mode
+
+
+	-- love.graphics.line(curve:render())
 --	love.graphics.setColor(1, 1, 1)
 --	love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 

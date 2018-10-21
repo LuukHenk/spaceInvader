@@ -1,13 +1,13 @@
 local game = {}
+local controller = require 'controller'
 game.levels = {}
 game.bullets = {}
 game.currentLevel = tostring(0)
 game.maxLevel = 0
 
-function game.load(screenWidth, screenHeight, gameMusic)
+function game.load(screenWidth, screenHeight)
 	game.bullets = {}
 	--load controllers
-	local controller = require 'controller'
 	game.players = controller.createPlayers(1, screenWidth, screenHeight)
 
 	game.levels['1'] = {}
@@ -18,11 +18,11 @@ function game.load(screenWidth, screenHeight, gameMusic)
 
 	game.levels['3'] = {}
 	game.levels['3'] = controller.addEnemies('normal', 20, game.levels['3'], screenWidth)
+	-- game.levels['3'] = controller.addEnemies('fast'  , 5 , game.levels['3'], screenWidth)
 	for _, level in pairs(game.levels) do
 		game.maxLevel = game.maxLevel + 1
 	end
 	game.currentLevel = tostring(1)
-	gameMusic:play()
 end
 
 function game.play(dt, graph, screenWidth, screenHeight)
@@ -82,28 +82,27 @@ function game.play(dt, graph, screenWidth, screenHeight)
 end
 
 function currentScreenStatus(keybinds, screenHeight, totalPlayers, dieSound, enemies)
+	local screenmode = 'gameScreen'
 	if #enemies == 0 then
 		game.bullets = {}
-		if tonumber(game.currentLevel) == game.maxLevel then
-			return 'mainScreen'
+		if tonumber(game.currentLevel) == game.maxLevel then screenmode = 'mainScreen'
 		else
 			game.currentLevel = tostring(tonumber(game.currentLevel) + 1)
-			return 'gameScreen'
 		end
 
 	elseif totalPlayers == 0 then
 		dieSound:play()
-		return 'mainScreen'
+		screenmode = 'mainScreen'
 
 	else
 		for _,enemy in pairs(enemies) do
 			if enemy.y >= screenHeight - 90 then
 				dieSound:play()
-				return 'mainScreen'
-
-			else return 'gameScreen' end
+				screenmode = 'mainScreen' end
 		end
 	end
+
+	return screenmode
 end
 
 

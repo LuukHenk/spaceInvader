@@ -74,4 +74,38 @@ function createNormal()
 	objects['normal'] = normal
 	return normal
 end
+
+function createFast()
+	local fast = {}
+	fast.mode = 'fast'
+	fast.x = 0
+	fast.y = 0
+
+	fast.speed = 60
+
+	fast.outlines          = {}
+	fast.outlines['up']    = 15
+	fast.outlines['down']  = 88
+	fast.outlines['left']  = 22
+	fast.outlines['right'] = 88
+
+	fast.width  = fast.outlines['right'] - fast.outlines['left']
+	fast.height = fast.outlines['down']  - fast.outlines['up']
+
+	fast.bulletSpeed = 210
+	fast.bulletDevX  = 20
+	fast.bulletDevY  = 50
+
+	fast.bulletOutlines          = {}
+	fast.bulletOutlines['up']    = 0
+	fast.bulletOutlines['down']  = 10
+	fast.bulletOutlines['left']  = 0
+	fast.bulletOutlines['right'] = 10
+
+	fast.cooldownTime = 8
+	fast.cooldown     = love.math.random(0, fast.cooldownTime)
+
+	objects['fast'] = fast
+	return fast
+end
 return logic

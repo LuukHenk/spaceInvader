@@ -1,107 +1,124 @@
 local setup = {}
 local scaleMultiply = 6
 
-function generateText(font)
+function generateText()
 	local screenWidth = love.graphics.getWidth()
 	local text = {}
 
-	--Winning text
-	local winningText				 = {}
-	winningText.str    = 'You have won the game!\nPress Esc to exit the game.'
-	winningText.len    = font:getWidth(winningText.str)
-	winningText.x      = screenWidth / 2 - winningText.len / 6 - 300
-	winningText.y      = 100
-	winningText.scaleX = 0
-	winningText.scaleY = 3
+	text['mainScreen']     = {}
+	text['pauseScreen']    = {}
+	text['settingsScreen'] = {}
 
-	text.win         = {}
-	table.insert(text.win, winningText)
+	local	mainScreen = {}
 
-	--gameOver text
-	local	gameOverText	= {}
-	gameOverText.str		= 'Game Over!\nPress the Esc to exit the game.'
-	gameOverText.len		= font:getWidth(gameOverText.str)
-	gameOverText.x      = screenWidth / 2 - gameOverText.len / 6 - 300
-	gameOverText.y      = 100
-	gameOverText.scaleX = 0
-	gameOverText.scaleY = 3
+	mainScreen.spaceText      = {}
+	mainScreen.spaceText.mode = 'space'
+	mainScreen.spaceText.str	= 'Space Invaders'
+	mainScreen.spaceText.size = 100
+	mainScreen.spaceText.x    = 'center'
+	mainScreen.spaceText.y    = 100
 
-	text.lost		  		 = {}
-	table.insert(text.lost, gameOverText)
-	--pause text
+	mainScreen.playText      = {}
+	mainScreen.playText.mode = 'play'
+	mainScreen.playText.str  = 'Play game'
+	mainScreen.playText.size = 40
+	mainScreen.playText.x    = 'center'
+	mainScreen.playText.y    = 300
 
-	local	resumeText  = {}
-	resumeText.mode   = 'resume'
-	resumeText.str		= 'Resume game'
-	resumeText.len		= font:getWidth(resumeText.str)
-	resumeText.scaleX = 0
-	resumeText.scaleY = 3
-	resumeText.x			= screenWidth / 2 - resumeText.len * resumeText.scaleY / 2
-	resumeText.y			=	540
+	mainScreen.settingsText      = {}
+	mainScreen.settingsText.mode = 'settings'
+	mainScreen.settingsText.str  = 'Settings'
+	mainScreen.settingsText.size = 40
+	mainScreen.settingsText.x    = 'center'
+	mainScreen.settingsText.y    = 360
 
-	local quitText  = {}
-	quitText.mode   = 'quit'
-	quitText.str		= 'Quit game'
-	quitText.len		= font:getWidth(quitText.str)
-	quitText.scaleX = 0
-	quitText.scaleY = 3
-	quitText.x			= screenWidth / 2 - quitText.len * quitText.scaleY / 2
-	quitText.y			=	480
+	mainScreen.quitText      = {}
+	mainScreen.quitText.mode = 'quit'
+	mainScreen.quitText.str  = 'Quit game'
+	mainScreen.quitText.size = 40
+	mainScreen.quitText.x    = 'center'
+	mainScreen.quitText.y    = 420
 
-	text.pause				   = {}
-	table.insert(text.pause, resumeText)
-	table.insert(text.pause, quitText)
+	text['mainScreen'] = mainScreen
 
-	--menu text
-	local titleText  = {}
-	titleText.mode   = 'title'
-	titleText.str		 = 'Space Invaders'
-	titleText.len		 = font:getWidth(titleText.str)
-	titleText.scaleX = 0
-	titleText.scaleY = 10
-	titleText.x			 = screenWidth / 2 - titleText.len * titleText.scaleY / 2
-	titleText.y			 =	100
+	--------------------------------
 
-	local playText  = {}
-	playText.mode   = 'play'
-	playText.str 	  = 'Play game'
-	playText.len	  = font:getWidth(playText.str)
-	playText.scaleX = 0
-	playText.scaleY = 3
-	playText.x			= screenWidth / 2 - playText.len * playText.scaleY / 2
-	playText.y			=	300
+	local pauseScreen = {}
 
-	local settingsText  = {}
-	settingsText.mode   = 'settings'
-	settingsText.str		= 'Settings'
-	settingsText.len	  = font:getWidth(settingsText.str)
-	settingsText.scaleX = 0
-	settingsText.scaleY = 3
-	settingsText.x			= screenWidth / 2 - settingsText.len * settingsText.scaleY / 2
-	settingsText.y			=	360
+	pauseScreen.pauseText      = {}
+	pauseScreen.pauseText.mode = 'pause'
+	pauseScreen.pauseText.str  = 'Pause'
+	pauseScreen.pauseText.size = 70
+	pauseScreen.pauseText.x    = 'center'
+	pauseScreen.pauseText.y    = 100
 
-	local exitText  = {}
-	exitText.mode   = 'exit'
-	exitText.str		= 'Quit'
-	exitText.len	  = font:getWidth(exitText.str)
-	exitText.scaleX = 0
-	exitText.scaleY = 3
-	exitText.x			= screenWidth / 2 - exitText.len * exitText.scaleY / 2
-	exitText.y			=	420
+	pauseScreen.quitText      = {}
+	pauseScreen.quitText.mode = 'quit'
+	pauseScreen.quitText.str  = 'Quit game'
+	pauseScreen.quitText.size = 40
+	pauseScreen.quitText.x    = 'center'
+	pauseScreen.quitText.y    = 300
 
-	text.main = {}
-	table.insert(text.main, titleText)
-	table.insert(text.main, playText)
-	table.insert(text.main, settingsText)
-	table.insert(text.main, exitText)
+	pauseScreen.resumeText      = {}
+	pauseScreen.resumeText.mode = 'resume'
+	pauseScreen.resumeText.str  = 'Resume'
+	pauseScreen.resumeText.size = 40
+	pauseScreen.resumeText.x    = 'center'
+	pauseScreen.resumeText.y    = 360
+
+	pauseScreen.settingsText      = {}
+	pauseScreen.settingsText.mode = 'settings'
+	pauseScreen.settingsText.str  = 'Settings'
+	pauseScreen.settingsText.size = 40
+	pauseScreen.settingsText.x    = 'center'
+	pauseScreen.settingsText.y    = 420
+
+	text['pauseScreen'] = pauseScreen
+
+	--------------------------------
+
+	local settingsScreen = {}
+
+	settingsScreen.settingsText      = {}
+	settingsScreen.settingsText.mode = 'settings'
+	settingsScreen.settingsText.str  = 'Settings'
+	settingsScreen.settingsText.size = 70
+	settingsScreen.settingsText.x    = 'center'
+	settingsScreen.settingsText.y    = 100
+
+	settingsScreen.audioText      = {}
+	settingsScreen.audioText.mode = 'audio'
+	settingsScreen.audioText.str  = 'Volume'
+	settingsScreen.audioText.size = 40
+	settingsScreen.audioText.x    = 'center'
+	settingsScreen.audioText.y    = 300
+
+	--volumeText is made in settings menu at position.x 360
+
+	settingsScreen.videoText      = {}
+	settingsScreen.videoText.mode = 'video'
+	settingsScreen.videoText.str  = 'Video'
+	settingsScreen.videoText.size = 40
+	settingsScreen.videoText.x    = 'center'
+	settingsScreen.videoText.y    = 420
+
+	settingsScreen.keybindsText      = {}
+	settingsScreen.keybindsText.mode = 'keybinds'
+	settingsScreen.keybindsText.str  = 'Keybinds'
+	settingsScreen.keybindsText.size = 40
+	settingsScreen.keybindsText.x    = 'center'
+	settingsScreen.keybindsText.y    = 480
+
+	settingsScreen.quitText      = {}
+	settingsScreen.quitText.mode = 'quit'
+	settingsScreen.quitText.str  = 'Return'
+	settingsScreen.quitText.size = 40
+	settingsScreen.quitText.x    = 'center'
+	settingsScreen.quitText.y    = 540
+
+	text['settingsScreen'] = settingsScreen
 
 	return text
-end
-
-function getSounds()
-	local	sounds = {}
-	sounds.gameMusic = love.audio.newSource('sounds/background.mp3', 'stream')
-	return sounds
 end
 
 function createBackground(backgroundImage)
@@ -111,15 +128,6 @@ function createBackground(backgroundImage)
 	return background
 end
 
-function setFont(image)
-	local font = love.graphics.newImageFont(image,
-	    " abcdefghijklmnopqrstuvwxyz" ..
-	    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
-	    "123456789.,!?-+/():;%&`'*#=[]\"")
-	love.graphics.setFont(font)
-	return font
-end
-
 function getScaling(drawable, canvas)
 	local canvas = canvas or nil
 	local drawW = drawable:getWidth()
@@ -127,7 +135,7 @@ function getScaling(drawable, canvas)
 	local canvasW = 0
 	local canvasH = 0
 
-	if canvas then
+if canvas then
 		canvasW = canvas:getWidth()
 		canvasH = canvas:getHeight()
 	else
@@ -142,6 +150,7 @@ end
 
 setup.objects = {}
 local player = {}
+player.mode = 'player'
 player.bulletMode = 'fill'
 player.bulletR = 1
 player.bulletG = 1
@@ -151,11 +160,14 @@ player.imageScaleX = 0
 player.imageScaleY = 8
 player.image       = love.graphics.newImage('images/player.png')
 player.fireSound   = love.audio.newSource('sounds/Laser2.wav', 'static')
+player.fireSoundVol = 0.2
 player.dieSound    = love.audio.newSource('sounds/Explosion.wav', 'static')
+player.dieSoundVol = 1
 
 setup.objects['player'] = player
 
 local normal = {}
+normal.mode = 'normal'
 normal.bulletMode = 'fill'
 normal.bulletR = 1
 normal.bulletG = 0
@@ -165,9 +177,27 @@ normal.imageScaleX = 0
 normal.imageScaleY = 8
 normal.image       = love.graphics.newImage('images/enemy.png')
 normal.fireSound   = love.audio.newSource('sounds/Randomize4.wav', 'static')
+normal.fireSoundVol = 0.2
 normal.dieSound    = love.audio.newSource('sounds/Randomize.wav', 'static')
+normal.dieSoundVol = 0.8
 
 setup.objects['normal'] = normal
+
+local fast = {}
+
+fast.mode = 'fast'
+fast.bulletMode = 'fill'
+fast.bulletR = 1
+fast.bulletG = 0
+fast.bulletB = 1
+
+fast.imageScaleX = 0
+fast.imageScaleY = 8
+fast.image       = love.graphics.newImage('images/fast.png')
+fast.fireSound   = love.audio.newSource('sounds/Randomize4.wav', 'static')
+fast.fireSoundVol = 0.1
+fast.dieSound    = love.audio.newSource('sounds/Randomize.wav', 'static')
+fast.dieSoundVol = 0.4
 
 setup.keybinds = {}
 setup.keybinds.escape = 'escape'
@@ -179,7 +209,11 @@ setup.keybinds.left   = 'left'
 setup.keybinds.up     = 'up'
 setup.keybinds.down   = 'down'
 
+setup.gameMusic = love.audio.newSource('sounds/background.mp3', 'stream')
+setup.gameMusicVol = 1
 setup.background = createBackground('images/background.png')
-setup.text			 = generateText(setFont('images/fontText.png'))
-setup.sounds		 = getSounds()
+
+setup.text = generateText()
+setup.fontImage = 'fonts/press-start/prstart.ttf'
+
 return setup

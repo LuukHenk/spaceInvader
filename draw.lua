@@ -7,34 +7,24 @@ function draw.game(graph, enemies, players, bullets)
 	drawObjects(graph, players)
 end
 
-function draw.pause(background, text, status)
-	love.graphics.setColor(1, 1, 1)
+function draw.screen(background, fontImage, text, selected, screenWidth)
 	drawBackground(background)
 	for _, t in pairs(text) do
-		if t.mode == status then
-			love.graphics.setColor(1, 0, 1)
-			love.graphics.print(t.str, t.x, t.y, t.scaleX, t.scaleY)
-		else
-			love.graphics.setColor(1, 1, 1)
-			love.graphics.print(t.str, t.x, t.y, t.scaleX, t.scaleY)
-		end
-	end
+		draw.text(t, fontImage, selected, screenWidth) end
 end
 
-function draw.main(background, text, status)
-	love.graphics.setColor(1, 1, 1)
-	drawBackground(background)
-	for _, t in pairs(text) do
-		if t.mode == title then
-			love.graphics.print(t.str, t.x, t.y, t.scaleX, t.scaleY)
-		elseif t.mode == status then
-			love.graphics.setColor(1, 0, 1)
-			love.graphics.print(t.str, t.x, t.y, t.scaleX, t.scaleY)
-		else
-			love.graphics.setColor(1, 1, 1)
-			love.graphics.print(t.str, t.x, t.y, t.scaleX, t.scaleY)
-		end
-	end
+function draw.text(t, fontImage, selected, screenWidth)
+	if t.mode == selected then love.graphics.setColor(1, 0, 1)
+	else love.graphics.setColor(1, 1, 1) end
+
+	local font = love.graphics.setNewFont(fontImage, t.size)
+
+	if t.x == 'center' then love.graphics.print(t.str, setX(font, t.str, screenWidth), t.y)
+	else love.graphics.print(t.str, t.x, t.y)end
+end
+
+function setX(font, text, screenWidth)
+	return(screenWidth / 2 - font:getWidth(text) / 2)
 end
 
 function drawBackground(background)
@@ -59,14 +49,6 @@ function drawObjects(graph, objects)
 	end
 end
 
-function draw.screen(background, text)
-	drawBackground(background)
-
-	love.graphics.setColor(1, 1, 1)
-	for _, t in pairs(text) do
-		love.graphics.print(t.str, t.x, t.y, t.ScaleX, t.scaleY)
-	end
-end
 
 function showTable(table)
 	for index, data in ipairs(table) do
