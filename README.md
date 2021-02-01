@@ -1,6 +1,7 @@
 # SpaceInvader
 #### Version 0.1.0
 A simple spaceinvader game made with Lua Love. Builded to train myself with drawing gui's.
+Background soundtrack by Pim
 
 ## Quick start
 ### Requirements
