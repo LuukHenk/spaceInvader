@@ -1,4 +1,5 @@
 local config = require "config.game_config"
+local player = require "config.player"
 local drawer = require "draw"
 
 -- states
@@ -15,6 +16,7 @@ function game.load()
     game.current_level = 0
     game.enemies = {}
     game.bullets = {}
+    game.player = player.construct()
 end
 
 function game.update(dt)
@@ -22,9 +24,6 @@ function game.update(dt)
         game.go_to_next_level()
     elseif game.state == RUNNING_STATE then
         game.update_game_objects(dt)
-    elseif game.state == GAME_OVER_STATE then
-
-    elseif game.state == PAUSE_STATE then
     end
 end
 
@@ -32,25 +31,18 @@ function game.draw()
     if game.state == RUNNING_STATE then
         game.draw_game_objects()
     elseif game.state == GAME_OVER_STATE then
-        game.draw_game_over_screen()
-    elseif game.state == PAUSE_STATE then
+        drawer.draw_centered_text("Game over")
     end
-
-
-
 end
 
 function game.draw_game_objects()
+    drawer.draw_rectangle(game.player)
     for _, bullet in pairs(game.bullets) do
         drawer.draw_rectangle(bullet)
     end
     for _, enemy in pairs(game.enemies) do
         drawer.draw_rectangle(enemy)
     end
-end
-
-function game.draw_game_over_screen()
-    drawer.draw_centered_text("Game over")
 end
 
 function game.update_game_objects(dt)
