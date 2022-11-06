@@ -21,9 +21,6 @@ function base_object.construct(tag, x_coord, y_coord)
     object.coordinates.x = x_coord
     object.coordinates.y = y_coord
 
-    object.bullet_speed = 0
-    object.bullet_timeout = 0
-
     return object
 end
 

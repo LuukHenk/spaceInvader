@@ -1,4 +1,5 @@
 local config = require "config.game_config"
+local drawer = require "draw"
 
 -- states
 local RUNNING_STATE = "running"
@@ -28,33 +29,28 @@ function game.update(dt)
 end
 
 function game.draw()
-    for _, enemy in pairs(game.enemies) do
-        love.graphics.setColor(
-            enemy.color.red,
-            enemy.color.green,
-            enemy.color.blue,
-            enemy.color.alpha
-        )
-        love.graphics.rectangle(
-            enemy.mode,
-            enemy.coordinates.x,
-            enemy.coordinates.y,
-            enemy.width,
-            enemy.height
-        )
+    for _, bullet in pairs(game.bullets) do
+        drawer.draw_rectangle(bullet)
     end
+    for _, enemy in pairs(game.enemies) do
+        drawer.draw_rectangle(enemy)
+    end
+
+
 end
 
 function game.update_game_objects(dt)
+    -- TODO player update
     for _, enemy in pairs(game.enemies) do
-        -- TODO player update
-        enemy.move(dt)
-        print(enemy.coordinates.y, love.graphics.getHeight())
-        -- local enemy_bullet = enemy.spawn_bullet()
-        -- if enemy_bullet then table.insert(game.bullets, enemy_bullet) end
-        -- TODO bullet update
-        -- TODO collision update
+        local enemy_bullet = enemy.update(dt)
+        if enemy_bullet then table.insert(game.bullets, enemy_bullet) end
     end
+
+    for _, bullet in pairs(game.bullets) do
+        bullet.update(dt)
+    end
+    -- TODO bullet update
+    -- TODO collision update
 end
 
 function game.go_to_next_level()

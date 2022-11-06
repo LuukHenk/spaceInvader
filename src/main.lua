@@ -1,6 +1,4 @@
-
-
--- love.window.setFullscreen(true, 'desktop')
+love.window.setFullscreen(true, 'desktop')
 
 
 local EXPECTED_SCREEN_HEIGHT = 1080

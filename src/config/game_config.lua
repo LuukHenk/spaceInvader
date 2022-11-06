@@ -5,9 +5,14 @@ local game_config = {}
 
 -- Construct levels
 local level_1 = level_config.construct_level("level 1")
-level_1.add_enemy(base_enemy.construct(0, 0))
-level_1.add_enemy(base_enemy.construct(0, 50))
-level_1.add_enemy(base_enemy.construct(0, 100))
+local enemy_spacing = 192 * ScreenWidhtScalingFactor
+local total_enemies = 9
+local generated_enemies = 0
+repeat
+    generated_enemies = generated_enemies + 1
+    level_1.add_enemy(base_enemy.construct(enemy_spacing * generated_enemies, 0))
+until (generated_enemies == total_enemies)
+
 game_config.levels = { level_1 }
 
 return game_config
