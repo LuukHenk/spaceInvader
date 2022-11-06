@@ -11,12 +11,13 @@ local GAME_WON_STATE = "game_won"
 
 local game = {}
 
-function game.load()
+function game.load(controls)
     game.state = LEVEL_OVER_STATE
     game.current_level = 0
     game.enemies = {}
     game.bullets = {}
     game.player = player.construct()
+    game.controls = controls
 end
 
 function game.update(dt)
@@ -36,10 +37,10 @@ function game.draw()
 end
 
 function game.draw_game_objects()
-    drawer.draw_rectangle(game.player)
     for _, bullet in pairs(game.bullets) do
         drawer.draw_rectangle(bullet)
     end
+    drawer.draw_rectangle(game.player)
     for _, enemy in pairs(game.enemies) do
         drawer.draw_rectangle(enemy)
     end
@@ -48,6 +49,8 @@ end
 function game.update_game_objects(dt)
     -- TODO collision update
     -- TODO player update
+    local player_bullet = game.player.update(dt, game.controls)
+    if player_bullet then table.insert(game.bullets, player_bullet) end
     for _, enemy in pairs(game.enemies) do
         local enemy_bullet = enemy.update(dt)
         if enemy_bullet then table.insert(game.bullets, enemy_bullet) end

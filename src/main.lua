@@ -1,8 +1,9 @@
+love = love -- unnecessary statement, but otherwise I get many warnings about undefined love
+
 love.window.setFullscreen(true, 'desktop')
 
-
-local EXPECTED_SCREEN_HEIGHT = 1080
-local EXPECTED_SCREEN_WIDTH = 1920
+EXPECTED_SCREEN_HEIGHT = 1080
+EXPECTED_SCREEN_WIDTH = 1920
 
 ScreenWidhtScalingFactor = love.graphics.getWidth() / EXPECTED_SCREEN_WIDTH
 ScreenHeightScalingFactor = love.graphics.getHeight() / EXPECTED_SCREEN_HEIGHT
@@ -17,6 +18,7 @@ local MAX_FRAME_SKIP = 25
 local main = {}
 
 local game = require "game"
+local controls = require "controls"
 
 
 
@@ -60,7 +62,7 @@ end
 
 function love.load()
     main.state = IN_GAME_STATE
-    game.load()
+    game.load(controls)
 end
 
 function love.update(dt)
