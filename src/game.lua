@@ -13,13 +13,14 @@ function game.load()
     game.state = LEVEL_OVER_STATE
     game.current_level = 0
     game.enemies = {}
+    game.bullets = {}
 end
 
-function game.update()
+function game.update(dt)
     if game.state == LEVEL_OVER_STATE then
         game.go_to_next_level()
     elseif game.state == RUNNING_STATE then
-
+        game.update_game_objects(dt)
     elseif game.state == GAME_OVER_STATE then
 
     elseif game.state == PAUSE_STATE then
@@ -27,24 +28,32 @@ function game.update()
 end
 
 function game.draw()
-    if game.enemies then
-        for _, enemy in pairs(game.enemies) do
+    for _, enemy in pairs(game.enemies) do
+        love.graphics.setColor(
+            enemy.color.red,
+            enemy.color.green,
+            enemy.color.blue,
+            enemy.color.alpha
+        )
+        love.graphics.rectangle(
+            enemy.mode,
+            enemy.coordinates.x,
+            enemy.coordinates.y,
+            enemy.width,
+            enemy.height
+        )
+    end
+end
 
-            love.graphics.setColor(
-                enemy.color.red,
-                enemy.color.green,
-                enemy.color.blue,
-                enemy.color.alpha
-            )
-            print(enemy.color.red)
-            love.graphics.rectangle(
-                enemy.mode,
-                enemy.coordinates.x,
-                enemy.coordinates.y,
-                enemy.width,
-                enemy.height
-            )
-        end
+function game.update_game_objects(dt)
+    for _, enemy in pairs(game.enemies) do
+        -- TODO player update
+        enemy.move(dt)
+        print(enemy.coordinates.y, love.graphics.getHeight())
+        -- local enemy_bullet = enemy.spawn_bullet()
+        -- if enemy_bullet then table.insert(game.bullets, enemy_bullet) end
+        -- TODO bullet update
+        -- TODO collision update
     end
 end
 
@@ -62,11 +71,8 @@ function game.go_to_next_level()
 end
 
 function game.construct_level(level_config)
-    if level_config.enemies then
-        for _, enemy in pairs(level_config.enemies) do
-            print(enemy)
-            table.insert(game.enemies, enemy)
-        end
+    for _, enemy in pairs(level_config.enemies) do
+        table.insert(game.enemies, enemy)
     end
 end
 
