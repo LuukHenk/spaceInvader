@@ -5,6 +5,7 @@ local controls = {}
 local menu_controls = {}
 menu_controls.move_up = {"up", "w"}
 menu_controls.move_down = {"down", "s"}
+menu_controls.select = {"return", "space"}
 
 controls[panel_ids.selection_menu] = menu_controls
 

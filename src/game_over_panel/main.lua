@@ -14,7 +14,7 @@ local SELECTION_MENU_ITEMS = {RETURN_TO_MAIN_MENU_TEXT, START_OVER_TEXT}
 local GAME_OVER_TEXT = "Game over"
 
 function game_over_panel.load()
-    selection_menu.load(SELECTION_MENU_ITEMS)
+    selection_menu.load(SELECTION_MENU_ITEMS, game_over_panel.on_selection)
 end
 
 function game_over_panel.update(dt)
@@ -24,6 +24,14 @@ end
 function game_over_panel.draw()
     draw.draw_panel_title(GAME_OVER_TEXT)
     selection_menu.draw()
+end
+
+function game_over_panel.on_selection(selection)
+    if selection == START_OVER_TEXT then
+        game_over_panel.next_active_panel = panel_ids.game_panel
+    else
+        game_over_panel.next_active_panel = panel_ids.basic_panel
+    end
 end
 
 return game_over_panel
