@@ -4,7 +4,7 @@ local panel_ids = require "panel_manager.panel_ids"
 local panels = require "panel_manager.panels"
 
 local active_panel_manager = {}
-local default_active_panel =  panel_ids.game_over_panel
+local default_active_panel =  panel_ids.main_menu_panel
 active_panel_manager.active_panel = panels[default_active_panel]
 
 function active_panel_manager.load()
