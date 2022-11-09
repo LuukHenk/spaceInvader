@@ -1,6 +1,6 @@
 local config = require "config.game_config"
 local player = require "config.player"
-local drawer = require "draw"
+local draw = require "draw"
 
 -- states
 local RUNNING_STATE = "running"
@@ -32,17 +32,17 @@ function game.draw()
     if game.state == RUNNING_STATE then
         game.draw_game_objects()
     elseif game.state == GAME_OVER_STATE then
-        drawer.draw_centered_text("Game over")
+        draw.draw_centered_text("Game over")
     end
 end
 
 function game.draw_game_objects()
     for _, bullet in pairs(game.bullets) do
-        drawer.draw_rectangle(bullet)
+        draw.draw_rectangle(bullet)
     end
-    drawer.draw_rectangle(game.player)
+    draw.draw_rectangle(game.player)
     for _, enemy in pairs(game.enemies) do
-        drawer.draw_rectangle(enemy)
+        draw.draw_rectangle(enemy)
     end
 end
 

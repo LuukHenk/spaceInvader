@@ -1,6 +1,8 @@
+-- Holds the default love functionality
+
 love = love -- unnecessary statement, but otherwise I get many warnings about undefined love
 
-love.window.setFullscreen(true, 'desktop')
+-- love.window.setFullscreen(true, 'desktop')
 
 EXPECTED_SCREEN_HEIGHT = 1080
 EXPECTED_SCREEN_WIDTH = 1920
@@ -19,6 +21,8 @@ local main = {}
 
 local game = require "game"
 local controls = require "controls"
+
+local active_panel_manager = require "panel_manager.active_panel_manager"
 
 
 
@@ -61,22 +65,25 @@ function love.run()
 end
 
 function love.load()
-    main.state = IN_GAME_STATE
-    game.load(controls)
+    active_panel_manager.load()
+    -- main.state = IN_GAME_STATE
+    -- game.load(controls)
 end
 
 function love.update(dt)
-    if main.state == IN_GAME_STATE then
-        game.update(dt)
-    elseif main.state == MENU_STATE then
-        return
-    end
+    active_panel_manager.update(dt)
+    -- if main.state == IN_GAME_STATE then
+    --     game.update(dt)
+    -- elseif main.state == MENU_STATE then
+    --     return
+    -- end
 end
 
 function love.draw()
-    if main.state == IN_GAME_STATE then
-        game.draw()
-    elseif main.state == MENU_STATE then
-        return
-    end
+    active_panel_manager.draw()
+    -- if main.state == IN_GAME_STATE then
+    --     game.draw()
+    -- elseif main.state == MENU_STATE then
+    --     return
+    -- end
 end
