@@ -1,5 +1,5 @@
-local base_object = require "config.base_shooting_object"
-local base_bullet = require "config.bullets.player_bullet"
+local base_object = require "game_panel.config.base_shooting_object"
+local base_bullet = require "game_panel.config.bullets.player_bullet"
 local player_class = {}
 local PLAYER_TAG = "player"
 
@@ -20,26 +20,31 @@ function player_class.construct()
     player.bullet_timeout = 0.5
     player.bullet_cooldown = 0
 
-    function player.update(dt, controls)
-        -- Returns a bullet if a bullet has spawned else nil
+
+    function player.move(dt, controls)
         local direction = 0
 
-        if player.bullet_cooldown > 0 then
-            player.bullet_cooldown = player.bullet_cooldown - 1 * dt
-        end
-        if love.keyboard.isDown(controls.keybinds.move_left) then
+        if love.keyboard.isDown(controls.move_left) and player.coordinates.x > 0 then
             direction = direction - 1
         end
 
-        if love.keyboard.isDown(controls.keybinds.move_right) then
+        local right_movement_valid = player.width + player.coordinates.x < love.graphics.getWidth()
+        if love.keyboard.isDown(controls.move_right) and right_movement_valid then
             direction = direction + 1
         end
         player.coordinates.x = player.coordinates.x + player.speed * dt * direction
-        if love.keyboard.isDown(controls.keybinds.shoot) then
-            return player.shoot()
-        else
-            return nil
+    end
+
+    function player.shoot(dt, controls)
+        -- Returns a bullet if a bullet has spawned else nil
+        if player.bullet_cooldown > 0 then
+            player.bullet_cooldown = player.bullet_cooldown - 1 * dt
         end
+
+        if love.keyboard.isDown(controls.shoot) then
+            return player.parent_functions.shoot()
+        end
+        return nil
     end
 
     return player

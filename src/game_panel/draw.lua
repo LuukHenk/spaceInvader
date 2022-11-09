@@ -1,10 +1,12 @@
 --Holds the functionality for drawing the basic panel
 
 local global_draw = require "draw"
-local basic_draw = {}
+local game_draw = {}
 
-function basic_draw.draw_game()
-    global_draw.draw_centered_text("This is the game panel")
+function game_draw.draw_game_objects(objects)
+    global_draw.draw_multiple_rectangles(objects.bullets)
+    global_draw.draw_rectangle(objects.player)
+    global_draw.draw_multiple_rectangles(objects.enemies)
 end
 
-return basic_draw
+return game_draw

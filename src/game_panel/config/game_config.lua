@@ -1,5 +1,5 @@
-local base_enemy = require "config.base_enemy"
-local level_config = require "config.level_config"
+local base_enemy = require "game_panel.config.base_enemy"
+local level_config = require "game_panel.config.level_config"
 
 local game_config = {}
 

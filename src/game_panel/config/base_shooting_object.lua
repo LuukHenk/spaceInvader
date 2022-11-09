@@ -1,7 +1,8 @@
-local base_object = require "config.base_object"
-local base_bullet = require "config.bullets.base_bullet"
+local base_object = require "game_panel.config.base_object"
+local base_bullet = require "game_panel.config.bullets.base_bullet"
 
 local base_shooting_object_class = {}
+
 
 function base_shooting_object_class.construct(tag, x_coord, y_coord)
     local base_shooting_object = base_object.construct(tag, x_coord, y_coord)
@@ -9,8 +10,10 @@ function base_shooting_object_class.construct(tag, x_coord, y_coord)
     base_shooting_object.bullet = base_bullet
     base_shooting_object.bullet_timeout = 0
     base_shooting_object.bullet_cooldown = 0
+    base_shooting_object.parent_functions = {}
 
-    function base_shooting_object.shoot()
+    function base_shooting_object.parent_functions.shoot()
+        -- Let the base object shoot
         if base_shooting_object.bullet_cooldown > 0 then
             return nil
         end

@@ -1,9 +1,12 @@
+local panel_ids = require "panel_manager.panel_ids"
+
 local controls = {}
 
-controls.keybinds = {}
-controls.keybinds.shoot = { "space" }
-controls.keybinds.move_left = { "left", "a" }
-controls.keybinds.move_right = { "right", "d" }
+local game_panel_controls = {}
+game_panel_controls.shoot = { "space" }
+game_panel_controls.move_left = { "left", "a" }
+game_panel_controls.move_right = { "right", "d" }
 
+controls[panel_ids.game_panel] = game_panel_controls
 
 return controls

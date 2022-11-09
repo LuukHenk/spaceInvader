@@ -2,6 +2,13 @@ local draw = {}
 
 local font = love.graphics.getFont()
 
+
+function draw.draw_multiple_rectangles(objects)
+    for _, object in pairs(objects) do
+        draw.draw_rectangle(object)
+    end
+end
+
 function draw.draw_rectangle(object)
     love.graphics.setColor(
         object.color.red,
