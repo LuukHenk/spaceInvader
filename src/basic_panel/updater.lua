@@ -1,9 +1,5 @@
--- Holds the basic panel the functionailty during update
+-- Holds the update functionality for the current panel
 
 local updater = {}
-
-function updater.update_basic(dt)
-
-end
 
 return updater

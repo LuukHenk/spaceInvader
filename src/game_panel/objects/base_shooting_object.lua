@@ -1,11 +1,11 @@
-local base_object = require "game_panel.objects.base_object"
+local base_game_object = require "game_panel.objects.base_game_object"
 local base_bullet = require "game_panel.objects.bullets.base_bullet"
 
 local base_shooting_object_class = {}
 
 
 function base_shooting_object_class.construct(tag, x_coord, y_coord)
-    local base_shooting_object = base_object.construct(tag, x_coord, y_coord)
+    local base_shooting_object = base_game_object.construct(tag, x_coord, y_coord)
 
     base_shooting_object.bullet = base_bullet
     base_shooting_object.bullet_timeout = 0

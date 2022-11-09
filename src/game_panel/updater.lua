@@ -74,7 +74,7 @@ function updater.select_active_level(game)
     game.current_level = game.current_level + 1
     local level_config = config.levels[game.current_level]
     if not level_config then
-        updater.handle_game_won(game)
+        updater.handle_game_over(game)
         return
     end
 
@@ -93,12 +93,7 @@ end
 
 function updater.handle_game_over(game)
     game.objects.clear()
-    game.next_active_panel = panel_ids.basic_panel
-end
-
-function updater.handle_game_won(game)
-    game.objects.clear()
-    game.next_active_panel = panel_ids.basic_panel
+    game.next_active_panel = panel_ids.game_over_panel
 end
 
 function updater.check_for_collision(object, target)

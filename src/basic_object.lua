@@ -1,6 +1,6 @@
-local base_object = {}
+local basic_object = {}
 
-function base_object.construct(tag, x_coord, y_coord)
+function basic_object.construct(tag, x_coord, y_coord)
     local object = {}
 
     object.tag = tag
@@ -8,9 +8,6 @@ function base_object.construct(tag, x_coord, y_coord)
 
     object.width = 0
     object.height = 0
-
-    object.speed = 0
-
     object.color = {}
     object.color.red = 0
     object.color.green = 0
@@ -20,8 +17,7 @@ function base_object.construct(tag, x_coord, y_coord)
     object.coordinates = {}
     object.coordinates.x = x_coord
     object.coordinates.y = y_coord
-
     return object
 end
 
-return base_object
+return basic_object

@@ -2,6 +2,12 @@ local panel_ids = require "panel_manager.panel_ids"
 
 local controls = {}
 
+local menu_controls = {}
+menu_controls.move_up = {"up", "w"}
+menu_controls.move_down = {"down", "s"}
+
+controls[panel_ids.selection_menu] = menu_controls
+
 local game_panel_controls = {}
 game_panel_controls.shoot = { "space" }
 game_panel_controls.move_left = { "left", "a" }
