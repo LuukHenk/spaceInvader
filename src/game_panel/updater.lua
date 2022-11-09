@@ -1,6 +1,7 @@
 -- Holds the basic panel the functionailty during update
 local config = require "game_panel.config.game_config"
 local panel_ids = require "panel_manager.panel_ids"
+local object_tags = require "game_panel.objects.object_tags"
 
 local updater = {}
 
@@ -10,7 +11,7 @@ function updater.update_game(dt, game)
     -- TODO handle collision
     updater.handle_player(dt, game)
     updater.handle_enemies(dt, game)
-    updater.handle_bullets(dt, game.objects.bullets)
+    updater.handle_bullets(dt, game)
 end
 
 function updater.handle_player(dt, game)
@@ -26,7 +27,8 @@ function updater.handle_enemies(dt, game)
 
     for _, enemy in pairs(enemies) do
         enemy.move(dt)
-        if enemy.coordinates.y + enemy.height > love.graphics.getHeight() then
+        local enemy_reaches_world =  enemy.coordinates.y + enemy.height > love.graphics.getHeight()
+        if enemy_reaches_world or updater.check_for_collision(enemy, game.objects.player) then
             updater.handle_game_over(game)
             return
         end
@@ -36,9 +38,30 @@ function updater.handle_enemies(dt, game)
     end
 end
 
-function updater.handle_bullets(dt, bullets)
+function updater.handle_bullets(dt, game)
+    local bullets = game.objects.bullets
+    local player = game.objects.player
+    local enemies = game.objects.enemies
+
     for _, bullet in pairs(bullets) do
+
+        if bullet.tag == object_tags.enemy and updater.check_for_collision(bullet, player) then
+            updater.handle_game_over(game)
+        end
+
+        if bullet.tag == object_tags.player then
+            updater.remove_enemy_on_collision(enemies, bullet)
+        end
+
         bullet.update(dt)
+    end
+end
+
+function updater.remove_enemy_on_collision(enemies, target)
+    for id, enemy in pairs(enemies) do
+        if updater.check_for_collision(enemy, target) then
+            table.remove(enemies, id)
+        end
     end
 end
 
@@ -76,6 +99,35 @@ end
 function updater.handle_game_won(game)
     game.objects.clear()
     game.next_active_panel = panel_ids.basic_panel
+end
+
+function updater.check_for_collision(object, target)
+    -- Returns the target its tag if there is collision
+    if ((
+            object.coordinates.x <= target.coordinates.x
+            and object.coordinates.y <= target.coordinates.y
+            and object.coordinates.x + object.width >= target.coordinates.x
+            and object.coordinates.y + object.height >= target.coordinates.y
+        ) or (
+            object.coordinates.x <= target.coordinates.x
+            and object.coordinates.y >= target.coordinates.y
+            and object.coordinates.x + object.width >= target.coordinates.x
+            and object.coordinates.y <= target.coordinates.y + target.height
+        ) or (
+            object.coordinates.x >= target.coordinates.x
+            and object.coordinates.y <= target.coordinates.y
+            and object.coordinates.x <= target.coordinates.x + target.width
+            and object.coordinates.y + object.height >= target.coordinates.y
+        ) or (
+            object.coordinates.x >= target.coordinates.x
+            and object.coordinates.y >= target.coordinates.y
+            and object.coordinates.x <= target.coordinates.x + target.width
+            and object.coordinates.y <= target.coordinates.y + target.height
+        )
+    ) then
+        return true
+    end
+    return false
 end
 
 return updater

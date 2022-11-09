@@ -5,7 +5,7 @@ local game_config = {}
 
 -- Construct levels
 local level_1 = level_config.construct_level("level 1")
-local total_enemies = 30
+local total_enemies = 10
 local generated_enemies = 0
 
 local enemy_spacing = EXPECTED_SCREEN_WIDTH / (total_enemies + 1) * ScreenWidhtScalingFactor

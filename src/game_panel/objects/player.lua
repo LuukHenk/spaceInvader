@@ -1,14 +1,14 @@
 local base_object = require "game_panel.objects.base_shooting_object"
 local base_bullet = require "game_panel.objects.bullets.player_bullet"
+local object_tags = require "game_panel.objects.object_tags"
 local player_class = {}
-local PLAYER_TAG = "player"
 
 player_class.HEIGHT = 15 * ScreenHeightScalingFactor
 player_class.WIDTH = 50 * ScreenWidhtScalingFactor
 function player_class.construct()
     local y_coord = love.graphics.getHeight() - player_class.HEIGHT
     local x_coord = love.graphics.getWidth() / 2 - player_class.WIDTH / 2
-    local player = base_object.construct(PLAYER_TAG, x_coord, y_coord)
+    local player = base_object.construct(object_tags.player, x_coord, y_coord)
 
     player.color.red = 1
     player.color.green = 0.31
