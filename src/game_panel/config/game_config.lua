@@ -1,11 +1,11 @@
-local base_enemy = require "game_panel.config.base_enemy"
+local base_enemy = require "game_panel.objects.base_enemy"
 local level_config = require "game_panel.config.level_config"
 
 local game_config = {}
 
 -- Construct levels
 local level_1 = level_config.construct_level("level 1")
-local total_enemies = 300
+local total_enemies = 30
 local generated_enemies = 0
 
 local enemy_spacing = EXPECTED_SCREEN_WIDTH / (total_enemies + 1) * ScreenWidhtScalingFactor

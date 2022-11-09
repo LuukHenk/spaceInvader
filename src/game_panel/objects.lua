@@ -1,6 +1,6 @@
 -- Holds the game objects
 
-local player = require "game_panel.config.player"
+local player = require "game_panel.objects.player"
 local game_objects = {}
 
 function game_objects.check_active_enemies()

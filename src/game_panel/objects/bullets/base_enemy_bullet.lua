@@ -1,4 +1,4 @@
-local base_bullet = require "game_panel.config.bullets.base_bullet"
+local base_bullet = require "game_panel.objects.bullets.base_bullet"
 
 local base_enemy_bullet = {}
 base_enemy_bullet.WIDTH = 10 * ScreenWidhtScalingFactor

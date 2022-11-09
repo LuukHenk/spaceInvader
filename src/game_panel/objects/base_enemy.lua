@@ -1,5 +1,5 @@
-local base_object = require "game_panel.config.base_shooting_object"
-local base_enemy_bullet = require "game_panel.config.bullets.base_enemy_bullet"
+local base_object = require "game_panel.objects.base_shooting_object"
+local base_enemy_bullet = require "game_panel.objects.bullets.base_enemy_bullet"
 local base_enemy = {}
 base_enemy.TAG = "enemy"
 base_enemy.WIDTH = 20 * ScreenWidhtScalingFactor

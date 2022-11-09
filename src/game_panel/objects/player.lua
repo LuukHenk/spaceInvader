@@ -1,5 +1,5 @@
-local base_object = require "game_panel.config.base_shooting_object"
-local base_bullet = require "game_panel.config.bullets.player_bullet"
+local base_object = require "game_panel.objects.base_shooting_object"
+local base_bullet = require "game_panel.objects.bullets.player_bullet"
 local player_class = {}
 local PLAYER_TAG = "player"
 

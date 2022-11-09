@@ -1,4 +1,4 @@
-local base_object = require "game_panel.config.base_object"
+local base_object = require "game_panel.objects.base_object"
 
 local base_bullet = {}
 local BULLET_TAG = "bullet"
