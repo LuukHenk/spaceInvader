@@ -1,12 +1,13 @@
--- Holds the game panel
-
 local controls = require "controls"
 local panel_ids = require "panel_manager.panel_ids"
+local panel_factory = require "panel_manager.panel_factory"
+
 local updater = require "game_panel.updater"
 local draw = require "game_panel.draw" 
 local objects = require "game_panel.objects"
 
-local game_panel = {}
+local game_panel = panel_factory.construct_panel(panel_ids.game_panel)
+
 game_panel.next_active_panel =  panel_ids.game_panel
 game_panel.panel_id = panel_ids.game_panel
 game_panel.controls = controls[game_panel.panel_id]

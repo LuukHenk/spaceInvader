@@ -1,13 +1,15 @@
 
+local panel_ids = require "panel_manager.panel_ids"
+local panel_factory = require "panel_manager.panel_factory"
+local controls = require "controls"
+local utils = require "utils"
+
 local updater = require "selection_menu.updater"
 local loader = require "selection_menu.loader"
 local draw = require "selection_menu.draw"
-local panel_ids = require "panel_manager.panel_ids"
-local controls = require "controls"
-local utils = require "utils"
-local selection_menu = {}
 
-selection_menu.panel_id = panel_ids.selection_menu
+local selection_menu = panel_factory.construct_panel(panel_ids.selection_menu)
+
 selection_menu.controls = controls[selection_menu.panel_id]
 
 function selection_menu.load(items, on_select_function)

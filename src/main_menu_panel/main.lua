@@ -1,12 +1,9 @@
--- Holds the game over panel
-
 local selection_menu = require "selection_menu.main"
 local panel_ids = require "panel_manager.panel_ids"
+local panel_factory = require "panel_manager.panel_factory"
 local draw = require "draw"
 
-local main_menu_panel = {}
-main_menu_panel.next_active_panel =  panel_ids.main_menu_panel
-main_menu_panel.panel_id = panel_ids.main_menu_panel
+local main_menu_panel = panel_factory.construct_panel(panel_ids.main_menu_panel)
 
 local START_GAME_TEXT = "Play"
 local SETTINGS_TEXT = "Settings"

@@ -1,23 +1,15 @@
--- Holds a basic example panel
-
 local panel_ids = require "panel_manager.panel_ids"
-local draw = require "basic_panel.draw"
+local panel_factory = require "panel_manager.panel_factory"
+local draw = require "draw"
 
-local basic_panel = {}
-basic_panel.next_active_panel =  panel_ids.basic_panel
-basic_panel.panel_id = panel_ids.basic_panel
-
+local basic_panel = panel_factory.construct_panel(panel_ids.basic_panel)
 
 function basic_panel.load()
     print("loaded basic panel")
-
-end
-
-function basic_panel.update(dt)
 end
 
 function basic_panel.draw()
-    draw.draw_basic()
+    draw.draw_panel_title("This is a basic page")
 end
 
 return basic_panel
