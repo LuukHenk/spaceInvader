@@ -7,8 +7,6 @@ local updater = {}
 
 function updater.update_game(dt, game)
     updater.select_active_level(game)
-
-    -- TODO handle collision
     updater.handle_player(dt, game)
     updater.handle_enemies(dt, game)
     updater.handle_bullets(dt, game)
@@ -93,6 +91,7 @@ end
 
 function updater.handle_game_over(game)
     game.objects.clear()
+    game.current_level = 0
     game.next_active_panel = panel_ids.game_over_panel
 end
 

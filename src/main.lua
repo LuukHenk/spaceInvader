@@ -1,7 +1,3 @@
--- Holds the default love functionality
-
-love = love -- unnecessary statement, but otherwise I get many warnings about undefined love
-
 love.window.setFullscreen(true, 'desktop')
 
 EXPECTED_SCREEN_HEIGHT = 1080
