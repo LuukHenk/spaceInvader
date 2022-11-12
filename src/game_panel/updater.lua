@@ -2,6 +2,7 @@
 local config = require "game_panel.config.game_config"
 local panel_ids = require "panel_manager.panel_ids"
 local object_tags = require "game_panel.objects.object_tags"
+local level_factory = require "level_manager.level_factory"
 
 local updater = {}
 
@@ -70,24 +71,15 @@ function updater.select_active_level(game)
     end
 
     game.current_level = game.current_level + 1
-    local level_config = config.levels[game.current_level]
-    if not level_config then
+    local level_objects = level_factory.construct_level(game.current_level)
+    if not level_objects then
         updater.handle_game_over(game)
         return
     end
 
-    updater.construct_level(game, level_config)
+    game.objects.enemies = level_objects
 end
 
-function updater.construct_level(game, level_config)
-    -- Constructs the next active level
-    game.objects.enemies = {}
-    game.objects.bullets = {}
-
-    for _, enemy in pairs(level_config.enemies) do
-        table.insert(game.objects.enemies, enemy)
-    end
-end
 
 function updater.handle_game_over(game)
     game.objects.clear()

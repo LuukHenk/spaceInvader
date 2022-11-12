@@ -5,10 +5,12 @@ local player_class = {}
 
 player_class.HEIGHT = 15 * ScreenHeightScalingFactor
 player_class.WIDTH = 50 * ScreenWidhtScalingFactor
+player_class.TAG = object_tags.player
+
 function player_class.construct()
     local y_coord = love.graphics.getHeight() - player_class.HEIGHT
     local x_coord = love.graphics.getWidth() / 2 - player_class.WIDTH / 2
-    local player = base_object.construct(object_tags.player, x_coord, y_coord)
+    local player = base_object.construct(player_class.TAG, x_coord, y_coord)
 
     player.color.red = 1
     player.color.green = 0.31

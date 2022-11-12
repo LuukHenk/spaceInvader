@@ -4,9 +4,10 @@ local object_tags       = require "game_panel.objects.object_tags"
 local base_enemy = {}
 
 base_enemy.WIDTH = 20 * ScreenWidhtScalingFactor
+base_enemy.TAG = object_tags.enemy
 
 function base_enemy.construct(x_coord, y_coord)
-    local enemy = base_object.construct(object_tags.enemy, x_coord, y_coord)
+    local enemy = base_object.construct(base_enemy.TAG, x_coord, y_coord)
     enemy.color.green = 1
     enemy.width = base_enemy.WIDTH
     enemy.height = 20 * ScreenWidhtScalingFactor
