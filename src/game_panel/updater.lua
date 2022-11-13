@@ -8,7 +8,7 @@ local updater = {}
 function updater.update_game(dt, game)
     updater.select_active_level(game)
     updater.update_game_objects(dt, game.object_handler)
-    -- updater.check_if_game_over(game)
+    updater.check_if_game_over(game)
 end
 
 function updater.update_game_objects(dt, object_handler)
@@ -27,7 +27,6 @@ function updater.handle_object_collision(object, targets)
             object.division ~= target.division
             and updater.check_for_collision(object, target)
         ) then
-            print(target.type, object.type)
             updater.handle_object_combat(object, target)
         end
     end
@@ -44,7 +43,23 @@ function updater.remove_if_dead(object, object_handler)
     end
 end
 
--- function updater.check_if_game_over(game)
+function updater.check_if_game_over(game)
+    if (
+        not game.object_handler.player 
+        or updater.check_if_enemies_reached_earth(game.object_handler.enemies)
+    ) then
+        updater.handle_game_over(game)
+    end
+end
+
+function updater.check_if_enemies_reached_earth(enemies)
+    for _, enemy in pairs(enemies) do
+        if enemy.coordinates.y > love.graphics.getHeight() then
+            return true
+        end
+    end
+    return false
+end
 --     -- enemies reached earth
 --     -- player is dead
 --     if (
@@ -119,20 +134,8 @@ function updater.select_active_level(game)
     game.object_handler.add_objects(level_objects)
 end
 
--- function updater.check_if_enemies_reached_earth(objects)
---     for _, object in pairs(objects) do
---         if (
---             object.coordinates.y + object.height > love.graphics.getHeight()
---             and object.tag == object_types.enemy
---         ) then
---             return true
---         end
---     end
---     return false
--- end
-
 function updater.handle_game_over(game)
-    game.objects = {}
+    game.object_handler.reset()
     game.current_level = 0
     game.next_active_panel = panel_ids.game_over_panel
 end
