@@ -1,5 +1,6 @@
 local basic_object = {}
 
+-- Abstract class
 function basic_object.construct(tag, x_coord, y_coord)
     local object = {}
 
@@ -17,6 +18,19 @@ function basic_object.construct(tag, x_coord, y_coord)
     object.coordinates = {}
     object.coordinates.x = x_coord
     object.coordinates.y = y_coord
+
+    function object.resize(width, height)
+        object.width = width * ScreenWidhtScalingFactor
+        object.height = height * ScreenHeightScalingFactor
+    end
+
+    function object.set_color(red, green, blue, alpha)
+        object.color.red = red
+        object.color.green = green
+        object.color.blue = blue
+        object.color.alpha = alpha
+    end
+
     return object
 end
 

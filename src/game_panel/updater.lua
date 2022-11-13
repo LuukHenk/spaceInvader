@@ -1,5 +1,4 @@
 -- Holds the basic panel the functionailty during update
-local config = require "game_panel.config.game_config"
 local panel_ids = require "panel_manager.panel_ids"
 local object_tags = require "game_panel.objects.object_tags"
 local level_factory = require "level_manager.level_factory"
