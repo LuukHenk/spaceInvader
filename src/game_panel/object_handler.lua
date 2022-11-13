@@ -1,20 +1,30 @@
--- Holds the game objects
+local object_tags = require "game_objects.object_tags"
 
-local player = require "game_panel.objects.player"
-local game_objects = {}
+local object_handler = {}
 
-function game_objects.check_active_enemies()
-    -- checks if there are still enemies active. Returns true if there are still
-    -- enemies active
-    for _ in pairs(game_objects.enemies) do return true end
-    return false
+-- object_handler.player = 
+object_handler.enemies = {}
+object_handler.bullets = {}
+object_handler.other_objects = {}
+
+function object_handler.add_objects(game_objects)
+    for _, object in pairs(game_objects) do
+        if object.tag == object_tags.enemy then
+            table.insert(object_handler.enemies, object)
+        elseif object.tag == object_tags.bullet then 
+            table.insert(object_handler.bullets, object)
+        else
+            table.insert(object_handler.other_objects, object)
+        end
+    end
 end
 
-function game_objects.clear()
-    game_objects.player = player.construct()
-    game_objects.enemies = {}
-    game_objects.bullets = {}
+function object_handler.get_enemies()
+    return object_handler.enemies
 end
 
-game_objects.clear()
-return game_objects
+function object_handler.get_bullets()
+    return object_handler.bullets
+end
+
+return object_handler
