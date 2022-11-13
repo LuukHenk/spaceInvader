@@ -3,7 +3,7 @@ local basic_object = require "basic_object"
 local selection_menu_item = {}
 
 function selection_menu_item.construct(text, x_coord, y_coord)
-    local item = basic_object.construct(text, x_coord, y_coord)
+    local item = basic_object.construct(text, text, x_coord, y_coord)
 
     item.selected = false
     item.border = {}

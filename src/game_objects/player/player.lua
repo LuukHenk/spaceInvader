@@ -1,13 +1,17 @@
 
 local shooting_object = require "game_objects.shooting_object"
 local object_types = require "game_objects.object_types"
+local object_names = require "object_names"
 local player_bullet = require "game_objects.bullets.player_bullet"
 
 local player_class = {}
 
 function player_class.construct(controls)
     local player = shooting_object.construct(
-        object_types.player, love.graphics.getWidth() / 2, love.graphics.getHeight()
+        object_names.player,
+        object_types.player,
+        love.graphics.getWidth() / 2,
+        love.graphics.getHeight()
     )
     player.resize(50, 15)
     player.set_coordinates(

@@ -10,8 +10,8 @@ function game_object_class.__set_object_id()
 end
 
 -- Abstract class
-function game_object_class.construct(object_type, x_coord, y_coord)
-    local game_object = basic_object.construct(object_type, x_coord, y_coord)
+function game_object_class.construct(object_name, object_type, x_coord, y_coord)
+    local game_object = basic_object.construct(object_name, object_type, x_coord, y_coord)
 
     game_object.id = game_object_class.__set_object_id()
     game_object.speed = 0

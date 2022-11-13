@@ -3,8 +3,8 @@ local game_object = require "game_objects.game_object"
 local shooting_object_class = {}
 
 -- Abstract class
-function shooting_object_class.construct(object_type, x_coord, y_coord)
-    local shooting_object = game_object.construct(object_type, x_coord, y_coord)
+function shooting_object_class.construct(object_name, object_type, x_coord, y_coord)
+    local shooting_object = game_object.construct(object_name, object_type, x_coord, y_coord)
 
     shooting_object.bullet = game_object
     shooting_object.shooting_cooldown_time = 0

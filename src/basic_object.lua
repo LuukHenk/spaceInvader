@@ -1,9 +1,10 @@
 local basic_object = {}
 
 -- Abstract class
-function basic_object.construct(object_type, x_coord, y_coord)
+function basic_object.construct(object_name, object_type, x_coord, y_coord)
     local object = {}
 
+    object.name = object_name
     object.type = object_type
     object.mode = "fill"
 
