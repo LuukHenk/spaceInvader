@@ -12,14 +12,31 @@ function updater.update_game(dt, game)
 end
 
 function updater.update_game_objects(dt, object_handler)
-    for _, object in pairs(object_handler.get_all_objects()) do
+    local all_objects = object_handler.get_all_objects()
+    for _, object in pairs(all_objects) do
         object.update(dt)
-        -- Check for collision
+        updater.handle_object_collision(object, all_objects)
         -- Check (and destroy) if dead
         object_handler.add_objects(object.collect_constructed_game_objects())
     end
 end
 
+function updater.handle_object_collision(object, targets)
+    for _, target in pairs(targets) do
+        if (
+            object.division ~= target.division
+            and updater.check_for_collision(object, target)
+        ) then
+            print(target.type, object.type)
+            updater.handle_object_combat(object, target)
+        end
+    end
+end
+
+function updater.handle_object_combat(object, target)
+    object.lives = object.lives - target.strength
+    target.lives = target.lives - object.strength
+end
 
 -- function updater.check_if_game_over(game)
 --     -- enemies reached earth
@@ -115,7 +132,6 @@ function updater.handle_game_over(game)
 end
 
 function updater.check_for_collision(object, target)
-    -- Returns the target its tag if there is collision
     if ((
             object.coordinates.x <= target.coordinates.x
             and object.coordinates.y <= target.coordinates.y
