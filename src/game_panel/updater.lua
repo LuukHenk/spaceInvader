@@ -1,6 +1,6 @@
 -- Holds the basic panel the functionailty during update
 local panel_ids = require "panel_manager.panel_ids"
-local object_tags = require "game_objects.object_tags"
+local object_types = require "game_objects.object_types"
 local level_factory = require "level_manager.level_factory"
 
 local updater = {}
@@ -25,7 +25,7 @@ end
 --     -- enemies reached earth
 --     -- player is dead
 --     if (
---         -- not updater.check_if_tag_in_objects(object_tags.player, game.objects) 
+--         -- not updater.check_if_tag_in_objects(object_types.player, game.objects) 
 --         updater.check_if_enemies_reached_earth(game.objects)
 --     ) then
 --         updater.handle_game_over(game)
@@ -62,11 +62,11 @@ end
 
 --     for _, bullet in pairs(bullets) do
 
---         if bullet.tag == object_tags.enemy and updater.check_for_collision(bullet, player) then
+--         if bullet.tag == object_types.enemy and updater.check_for_collision(bullet, player) then
 --             updater.handle_game_over(game)
 --         end
 
---         if bullet.tag == object_tags.player then
+--         if bullet.tag == object_types.player then
 --             updater.remove_enemy_on_collision(enemies, bullet)
 --         end
 
@@ -96,17 +96,17 @@ function updater.select_active_level(game)
     game.object_handler.add_objects(level_objects)
 end
 
-function updater.check_if_enemies_reached_earth(objects)
-    for _, object in pairs(objects) do
-        if (
-            object.coordinates.y + object.height > love.graphics.getHeight()
-            and object.tag == object_tags.enemy
-        ) then
-            return true
-        end
-    end
-    return false
-end
+-- function updater.check_if_enemies_reached_earth(objects)
+--     for _, object in pairs(objects) do
+--         if (
+--             object.coordinates.y + object.height > love.graphics.getHeight()
+--             and object.tag == object_types.enemy
+--         ) then
+--             return true
+--         end
+--     end
+--     return false
+-- end
 
 function updater.handle_game_over(game)
     game.objects = {}

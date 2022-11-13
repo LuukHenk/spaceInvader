@@ -36,7 +36,7 @@ function selection_menu_draw.draw_text(item)
         item.color.alpha
     )
     love.graphics.print(
-        item.tag,
+        item.type,
         item.coordinates.x + item.border.left,
         item.coordinates.y + item.border.top
     )

@@ -46,7 +46,7 @@ end
 function updater.on_select(selection_menu)
     for item_index, item in pairs(selection_menu.items) do
         if item_index == selection_menu.selected_item then
-            selection_menu.on_select_function(item.tag)
+            selection_menu.on_select_function(item.type)
         end
     end
 end

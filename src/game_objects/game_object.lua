@@ -3,8 +3,8 @@ local basic_object = require "basic_object"
 local game_object_class = {}
 
 -- Abstract class
-function game_object_class.construct(tag, x_coord, y_coord)
-    local game_object = basic_object.construct(tag, x_coord, y_coord)
+function game_object_class.construct(object_type, x_coord, y_coord)
+    local game_object = basic_object.construct(object_type, x_coord, y_coord)
 
     game_object.speed = 0
     game_object.lives = 1

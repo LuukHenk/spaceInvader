@@ -1,4 +1,4 @@
-local object_tags = require "game_objects.object_tags"
+local object_types = require "game_objects.object_types"
 local player = require "game_objects.player.player"
 local object_handler = {}
 
@@ -13,9 +13,9 @@ end
 
 function object_handler.add_objects(game_objects)
     for _, object in pairs(game_objects) do
-        if object.tag == object_tags.enemy then
+        if object.type == object_types.enemy then
             table.insert(object_handler.enemies, object)
-        elseif object.tag == object_tags.bullet then
+        elseif object.type == object_types.bullet then
             table.insert(object_handler.bullets, object)
         else
             table.insert(object_handler.other_objects, object)

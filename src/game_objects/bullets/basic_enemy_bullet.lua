@@ -1,8 +1,8 @@
 local bullet_object = require "game_objects.bullet"
 local basic_enemy_bullet_class = {}
 
-function basic_enemy_bullet_class.construct(tag, x_coord, y_coord)
-    local bullet = bullet_object.construct(tag, x_coord, y_coord)
+function basic_enemy_bullet_class.construct(object_type, x_coord, y_coord)
+    local bullet = bullet_object.construct(object_type, x_coord, y_coord)
 
     bullet.set_color(0, 0.92, 1, 1)
     bullet.resize(10, 30)

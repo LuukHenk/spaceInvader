@@ -1,13 +1,13 @@
 
 local shooting_object = require "game_objects.shooting_object"
-local object_tags = require "game_objects.object_tags"
+local object_types = require "game_objects.object_types"
 local player_bullet = require "game_objects.bullets.player_bullet"
 
 local player_class = {}
 
 function player_class.construct(controls)
     local player = shooting_object.construct(
-        object_tags.player, love.graphics.getWidth() / 2, love.graphics.getHeight()
+        object_types.player, love.graphics.getWidth() / 2, love.graphics.getHeight()
     )
     player.resize(50, 15)
     player.set_coordinates(
@@ -26,7 +26,7 @@ function player_class.construct(controls)
 
     function player.update(dt)
         player.move(dt)
-        player.shoot(dt, love.keyboard.isDown(player.controls.shoot))
+        player.shoot(dt, not love.keyboard.isDown(player.controls.shoot))
     end
 
 
