@@ -49,5 +49,34 @@ function object_handler.get_all_objects()
     return all_objects
 end
 
+function object_handler.remove_object_by_id(object_id)
+    if object_handler.player.id == object_id then
+        object_handler.player = nil
+        return
+    end
+    
+    for i, enemy in ipairs(object_handler.enemies) do
+        if enemy.id == object_id then
+            table.remove(object_handler.enemies, i)
+            return
+        end
+    end
+    for i, bullet in ipairs(object_handler.bullets) do
+        if bullet.id == object_id then
+            table.remove(object_handler.bullets, i)
+            return
+        end
+    end
+    for i, other in ipairs(object_handler.other_objects) do
+        if other.id == object_id then
+            table.remove(object_handler.other_objects, i)
+            return
+        end
+    end
+
+    local error_message = "Invalid id: " + object_id
+    error(error_message)
+end
+
 
 return object_handler
