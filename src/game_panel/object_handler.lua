@@ -1,17 +1,21 @@
 local object_tags = require "game_objects.object_tags"
-
+local player = require "game_objects.player.player"
 local object_handler = {}
 
--- object_handler.player = 
+object_handler.player = nil
 object_handler.enemies = {}
 object_handler.bullets = {}
 object_handler.other_objects = {}
+
+function object_handler.spawn_player(controls)
+    object_handler.player = player.construct(controls)
+end
 
 function object_handler.add_objects(game_objects)
     for _, object in pairs(game_objects) do
         if object.tag == object_tags.enemy then
             table.insert(object_handler.enemies, object)
-        elseif object.tag == object_tags.bullet then 
+        elseif object.tag == object_tags.bullet then
             table.insert(object_handler.bullets, object)
         else
             table.insert(object_handler.other_objects, object)
@@ -28,7 +32,7 @@ function object_handler.enemies_alive()
 end
 
 function object_handler.get_all_objects()
-    local all_objects = {}
+    local all_objects = {object_handler.player}
 
     for _, enemy in pairs(object_handler.enemies) do
         table.insert(all_objects, enemy)
