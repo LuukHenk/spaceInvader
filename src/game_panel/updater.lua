@@ -8,6 +8,8 @@ local updater = {}
 function updater.update_game(dt, game)
     updater.select_active_level(game)
     updater.update_game_objects(dt, game.objects)
+    updater.destroy_objects_with_no_lives(game.objects)
+    updater.check_if_game_over(game)
     updater.spawn_new_game_objects(game.objects)
 end
 
@@ -26,7 +28,24 @@ function updater.spawn_new_game_objects(objects)
     end
     for _, object in pairs(new_objects) do
         table.insert(objects, 0, object)
-    end 
+    end
+end
+
+function updater.destroy_objects_with_no_lives(objects)
+    for i, object in pairs(objects) do
+        if object.lives < 1 then
+            table.remove(objects, i)
+        end
+    end
+end
+
+function updater.check_if_game_over(game)
+    if (
+        -- not updater.check_if_tag_in_objects(object_tags.player, game.objects) 
+        updater.check_if_enemies_reached_earth(game.objects)
+    ) then
+        updater.handle_game_over(game)
+    end
 end
 -- function updater.handle_player(dt, game)
 --     local player = game.objects.player
@@ -81,7 +100,7 @@ end
 
 function updater.select_active_level(game)
     -- Switches level if needed. Switches panel if all levels are done
-    if updater.check_for_active_enemies(game.objects) then return end
+    if updater.check_if_tag_in_objects(object_tags.enemy, game.objects) then return end
 
     game.current_level = game.current_level + 1
     local level_objects = level_factory.construct_level(game.current_level)
@@ -95,9 +114,21 @@ function updater.select_active_level(game)
     end
 end
 
-function updater.check_for_active_enemies(objects)
+function updater.check_if_tag_in_objects(tag, objects)
     for _, object in pairs(objects) do
-        if object.tag == object_tags.enemy then
+        if object.tag == tag then
+            return true
+        end
+    end
+    return false
+end
+
+function updater.check_if_enemies_reached_earth(objects)
+    for _, object in pairs(objects) do
+        if (
+            object.coordinates.y + object.height > love.graphics.getHeight()
+            and object.tag == object_tags.enemy
+        ) then
             return true
         end
     end
