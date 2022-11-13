@@ -19,12 +19,31 @@ function object_handler.add_objects(game_objects)
     end
 end
 
-function object_handler.get_enemies()
-    return object_handler.enemies
+function object_handler.enemies_alive()
+    -- Check if there is any enemy in the game
+    for _, _enemy in pairs(object_handler.enemies) do
+        return true
+    end
+    return false
 end
 
-function object_handler.get_bullets()
-    return object_handler.bullets
+function object_handler.get_all_objects()
+    local all_objects = {}
+
+    for _, enemy in pairs(object_handler.enemies) do
+        table.insert(all_objects, enemy)
+    end
+
+    for _, bullet in pairs(object_handler.bullets) do
+        table.insert(all_objects, bullet)
+    end
+
+    for _, other in pairs(object_handler.other_objects) do
+        table.insert(all_objects, other)
+    end
+
+    return all_objects
 end
+
 
 return object_handler

@@ -7,46 +7,30 @@ local updater = {}
 
 function updater.update_game(dt, game)
     updater.select_active_level(game)
-    updater.update_game_objects(dt, game.objects)
-    updater.destroy_objects_with_no_lives(game.objects)
-    updater.check_if_game_over(game)
-    updater.spawn_new_game_objects(game.objects)
+    updater.update_game_objects(dt, game.object_handler)
+    -- updater.check_if_game_over(game)
 end
 
-function updater.update_game_objects(dt, objects)
-    for _, object in pairs(objects) do
+function updater.update_game_objects(dt, object_handler)
+    for _, object in pairs(object_handler.get_all_objects()) do
         object.update(dt)
+        -- Check for collision
+        -- Check (and destroy) if dead
+        object_handler.add_objects(object.collect_constructed_game_objects())
     end
 end
 
-function updater.spawn_new_game_objects(objects)
-    local new_objects = {}
-    for _, object in pairs(objects) do
-        for _, new_object in pairs(object.collect_constructed_game_objects()) do
-            table.insert(new_objects, new_object)
-        end
-    end
-    for _, object in pairs(new_objects) do
-        table.insert(objects, 0, object)
-    end
-end
 
-function updater.destroy_objects_with_no_lives(objects)
-    for i, object in pairs(objects) do
-        if object.lives < 1 then
-            table.remove(objects, i)
-        end
-    end
-end
-
-function updater.check_if_game_over(game)
-    if (
-        -- not updater.check_if_tag_in_objects(object_tags.player, game.objects) 
-        updater.check_if_enemies_reached_earth(game.objects)
-    ) then
-        updater.handle_game_over(game)
-    end
-end
+-- function updater.check_if_game_over(game)
+--     -- enemies reached earth
+--     -- player is dead
+--     if (
+--         -- not updater.check_if_tag_in_objects(object_tags.player, game.objects) 
+--         updater.check_if_enemies_reached_earth(game.objects)
+--     ) then
+--         updater.handle_game_over(game)
+--     end
+-- end
 -- function updater.handle_player(dt, game)
 --     local player = game.objects.player
 --     player.move(dt, game.controls)
@@ -100,7 +84,7 @@ end
 
 function updater.select_active_level(game)
     -- Switches level if needed. Switches panel if all levels are done
-    if updater.check_if_tag_in_objects(object_tags.enemy, game.objects) then return end
+    if game.object_handler.enemies_alive() then return end
 
     game.current_level = game.current_level + 1
     local level_objects = level_factory.construct_level(game.current_level)
@@ -109,18 +93,7 @@ function updater.select_active_level(game)
         return
     end
 
-    for _, object in pairs(level_objects) do
-        table.insert(game.objects, object)
-    end
-end
-
-function updater.check_if_tag_in_objects(tag, objects)
-    for _, object in pairs(objects) do
-        if object.tag == tag then
-            return true
-        end
-    end
-    return false
+    game.object_handler.add_objects(level_objects)
 end
 
 function updater.check_if_enemies_reached_earth(objects)
