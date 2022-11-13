@@ -22,7 +22,9 @@ function game_object_class.construct(tag, x_coord, y_coord)
     end
 
     function game_object.move_down(dt)
-        game_object.coordinates.y = game_object.coordinates.y + game_object.speed * dt
+        game_object.coordinates.y = (
+            game_object.coordinates.y + game_object.speed * dt *ScreenHeightScalingFactor
+        )
     end
 
     return game_object

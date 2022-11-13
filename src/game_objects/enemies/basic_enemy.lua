@@ -8,6 +8,7 @@ function basic_enemy_class.construct(x_coord, y_coord)
 
     enemy.resize(40, 40)
     enemy.set_color(0, 1, 0, 1)
+    enemy.speed = 25
     enemy.bullet = basic_enemy_bullet
     enemy.shooting_cooldown_time = 10
     enemy.shooting_cooldown = love.math.random(0, enemy.shooting_cooldown_time)

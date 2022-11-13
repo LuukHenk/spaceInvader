@@ -31,6 +31,11 @@ function basic_object.construct(tag, x_coord, y_coord)
         object.color.alpha = alpha
     end
 
+    function object.set_coordinates(x_coordinate, y_coordinate)
+        object.coordinates.x = x_coordinate
+        object.coordinates.y = y_coordinate
+    end
+
     return object
 end
 

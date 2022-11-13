@@ -12,7 +12,7 @@ function shooting_object_class.construct(tag, x_coord, y_coord)
 
     function  shooting_object.shoot(dt)
         -- Should be called every update tick
-        if shooting_object.shooting_cooldown > 0 then 
+        if shooting_object.shooting_cooldown > 0 then
             shooting_object.shooting_cooldown = shooting_object.shooting_cooldown - 1 * dt
             return
         end
@@ -21,14 +21,14 @@ function shooting_object_class.construct(tag, x_coord, y_coord)
     end
 
     function shooting_object.spawn_bullet()
-        local x_coordinate = (
-            shooting_object.coordinates.x +
-            shooting_object.width / 2 -
-            shooting_object.bullet.WIDTH / 2
-        )
+        local x_coordinate = shooting_object.coordinates.x + shooting_object.width / 2
         local bullet = shooting_object.bullet.construct(
             shooting_object.tag, x_coordinate, shooting_object.coordinates.y
         )
+
+        -- Can only finetune bullet coordinates after init
+        x_coordinate = x_coordinate - bullet.width / 2
+        bullet.set_coordinates(x_coordinate, bullet.coordinates.y)
         table.insert(shooting_object.constructed_game_objects, bullet)
     end
 
