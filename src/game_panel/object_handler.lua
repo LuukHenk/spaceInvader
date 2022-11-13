@@ -86,7 +86,7 @@ function object_handler_class.construct(player_controls)
             end
         end
 
-        local error_message = "Invalid id: " + object_id
+        local error_message = "Invalid id: " .. object_id
         error(error_message)
     end
 

@@ -49,6 +49,9 @@ function love.run()
 end
 
 function love.load()
+    local assets_handler_class = require "assets.assets_handler"
+    local assets_handler = assets_handler_class.construct()
+    print(assets_handler.get_sprite("enemy"))
     active_panel_manager.load()
 end
 
