@@ -1,4 +1,4 @@
--- love.window.setFullscreen(true, 'desktop')
+love.window.setFullscreen(true, 'desktop')
 
 EXPECTED_SCREEN_HEIGHT = 1080
 EXPECTED_SCREEN_WIDTH = 1920

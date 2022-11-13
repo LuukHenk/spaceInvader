@@ -18,6 +18,8 @@ function updater.update_game_objects(dt, object_handler)
         updater.handle_object_collision(object, all_objects)
         updater.remove_if_dead(object, object_handler)
         object_handler.add_objects(object.collect_constructed_game_objects())
+
+        if not object_handler.player then return end
     end
 end
 
