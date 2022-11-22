@@ -22,6 +22,7 @@ function love_handler_class.construct()
         if early_return_event then return 0 end
         love_handler.handle_updating()
         love_handler.handle_graphics()
+        if love.timer then love.timer.sleep(1 / 60) end
     end
 
     function love_handler.handle_updating()
@@ -35,7 +36,6 @@ function love_handler_class.construct()
             active_panel_manager.update(love_handler.TICK_RATE)
             love_handler.lag = love_handler.lag - love_handler.TICK_RATE
         end
-        if love.timer then love.timer.sleep(1 / 60) end
     end
 
     function love_handler.handle_graphics()
