@@ -1,3 +1,9 @@
+EXPECTED_SCREEN_HEIGHT = 1080
+EXPECTED_SCREEN_WIDTH = 1920
+
+ScreenWidhtScalingFactor = love.graphics.getWidth() / EXPECTED_SCREEN_WIDTH
+ScreenHeightScalingFactor = love.graphics.getHeight() / EXPECTED_SCREEN_HEIGHT
+
 local active_panel_manager = require "panel_manager.active_panel_manager"
 
 local love_handler_class = {}
