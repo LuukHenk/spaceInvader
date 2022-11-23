@@ -1,5 +1,6 @@
 local base_level = require "level_manager.levels.level"
 local basic_enemy = require "game_objects.enemies.basic_enemy"
+local fat_enemy = require "game_objects.enemies.fat_enemy"
 local level_object_spawner = require "level_manager.levels.level_object_spawner"
 local wave = require "level_manager.wave"
 local level_1_class = {}
@@ -20,6 +21,8 @@ function level_1_class.construct(assets)
     enemies = level_object_spawner.construct_many_at_top_of_screen(basic_enemy, 5)
     table.insert(level_1.waves, wave.construct(0.199, enemies))
 
+    enemies = level_object_spawner.construct_many_at_top_of_screen(fat_enemy, 1)
+    table.insert(level_1.waves, wave.construct(0.3939, enemies))
     return level_1
 end
 
