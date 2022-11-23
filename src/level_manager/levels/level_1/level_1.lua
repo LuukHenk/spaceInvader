@@ -10,7 +10,6 @@ local level_1_class = {}
 function level_1_class.construct(assets)
     local level_1 = base_level.construct(assets)
 
-    
     level_1.waves = {
         wave_1.construct(),
         wave_2.construct(),

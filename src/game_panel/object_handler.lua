@@ -42,12 +42,12 @@ function object_handler_class.construct(player_controls)
     function object_handler.get_all_objects()
         local all_objects = {object_handler.player}
 
-        for _, enemy in pairs(object_handler.enemies) do
-            table.insert(all_objects, enemy)
-        end
-
         for _, bullet in pairs(object_handler.bullets) do
             table.insert(all_objects, bullet)
+        end
+        
+        for _, enemy in pairs(object_handler.enemies) do
+            table.insert(all_objects, enemy)
         end
 
         for _, other in pairs(object_handler.other_objects) do

@@ -8,7 +8,7 @@ function player_bullet_class.construct(object_type, x_coord, y_coord)
     )
 
     bullet.set_color(1, 0, 0, 1)
-    bullet.resize(2, 30)
+    bullet.resize(4, 30)
     bullet.speed = 400
 
     function bullet.update(dt)
