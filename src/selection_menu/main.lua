@@ -11,12 +11,12 @@ local draw = require "selection_menu.draw"
 local selection_menu = panel_factory.construct_panel(panel_ids.selection_menu)
 
 selection_menu.controls = controls[selection_menu.panel_id]
+selection_menu.key_down = false
 
 function selection_menu.load(items, on_select_function)
     selection_menu.border_size = 5
     selection_menu.items = {}
     selection_menu.selected_item = nil
-    selection_menu.key_down = false
     selection_menu.y_coordinates = 400 * ScreenHeightScalingFactor
     selection_menu.on_select_function = on_select_function
 
