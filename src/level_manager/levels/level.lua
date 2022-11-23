@@ -13,8 +13,6 @@ function level_base_class.construct(assets)
         level.in_level_time = (love.timer.getTime() - level.start_time) * dt
         level.__spawn_new_enemies()
         level.__check_if_all_waves_spawned()
-        print(level.in_level_time)
-
     end
 
     function level.__spawn_new_enemies()
