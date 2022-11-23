@@ -16,4 +16,15 @@ function level_object_spawner.construct(object, relative_x_coord, releative_y_co
     return object_to_spawn
 end
 
+function level_object_spawner.construct_many_at_top_of_screen(object, amount)
+    local objects = {}
+
+    for i=1, amount do
+        local spawn_location = love.math.random(0, 9000) / 10000
+        local object_ = level_object_spawner.construct(object, spawn_location, 0)
+        table.insert(objects, object_)
+    end
+
+    return objects
+end
 return level_object_spawner

@@ -20,7 +20,7 @@ function player_class.construct(controls)
     )
     player.set_color(1, 0.31, 0, 1)
     
-    player.speed = 800
+    player.speed = 700
 
     player.bullet = player_bullet
     player.shooting_cooldown_time = 0.5

@@ -1,10 +1,10 @@
 local wave_class = {}
 
-function wave_class.construct()
+function wave_class.construct(start_time, enemies_to_spawn)
     local wave = {}
-    wave.start_time = 0
+    wave.start_time = start_time
+    wave.enemies_to_spawn = enemies_to_spawn
     wave.wave_over = false
-    wave.enemies_to_spawn = {}
 
     function wave.ready_to_spawn(current_level_timestamp)
         if wave.wave_over or wave.start_time > current_level_timestamp then

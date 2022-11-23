@@ -3,14 +3,14 @@ local level_base_class = {}
 function level_base_class.construct(assets)
     local level = {}
     level.assets = assets
-    level.start_time = os.clock()
-    level.in_level_time = os.clock() - level.start_time
+    level.start_time = love.timer.getTime()
+    level.in_level_time = love.timer.getTime() - level.start_time
 
     level.all_waves_spawned = false
     level.constructed_enemies = {}
 
-    function level.update()
-        level.in_level_time = os.clock() - level.start_time
+    function level.update(dt)
+        level.in_level_time = (love.timer.getTime() - level.start_time) * dt
         level.__spawn_new_enemies()
         level.__check_if_all_waves_spawned()
         print(level.in_level_time)

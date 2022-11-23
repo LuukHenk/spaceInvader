@@ -4,14 +4,14 @@ local updater = {}
 
 function updater.update_game(dt, game)
     updater.select_active_level(game)
-    updater.update_level(game)
+    updater.update_level(dt, game)
     updater.update_game_objects(dt, game.object_handler)
     updater.check_if_game_over(game)
 end
 
-function updater.update_level(game)
+function updater.update_level(dt, game)
     if game.current_level then
-        game.current_level.update()
+        game.current_level.update(dt)
         game.object_handler.add_objects(game.current_level.collect_constructed_enemies())
     end
 end
