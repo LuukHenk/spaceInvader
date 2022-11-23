@@ -65,13 +65,14 @@ function updater.select_active_level(game)
     if game.object_handler.enemies_alive() then return end
 
     game.current_level = game.current_level + 1
-    local level_objects = game.level_factory.construct_level(game.current_level)
-    if not level_objects then
+    local level = game.level_factory.construct_level(game.current_level)
+    if not level then
         updater.handle_game_over(game)
         return
     end
 
-    game.object_handler.add_objects(level_objects)
+    game.level_assets = level.assets
+    game.object_handler.add_objects(level.objects)
 end
 
 function updater.handle_game_over(game)

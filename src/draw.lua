@@ -32,4 +32,9 @@ function draw.draw_panel_title(text)
     love.graphics.print(text, x_coord, y_coord, 0, scaling_factor, scaling_factor)
 end
 
+function draw.draw_background(image)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.draw(image)
+end
+
 return draw
