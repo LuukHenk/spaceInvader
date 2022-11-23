@@ -8,10 +8,21 @@ function level_assets_class.construct(level_object_name, assets_handler)
     level_assets[asset_types.BACKGROUND] = assets_handler.get_object(
         level_object_name, asset_types.BACKGROUND
     )
+    level_assets[asset_types.MUSIC] = assets_handler.get_object(
+        level_object_name, asset_types.MUSIC
+    )
 
     function level_assets.get_background()
         return level_assets[asset_types.BACKGROUND]
     end
+
+    function level_assets.play_music()
+        if level_assets[asset_types.MUSIC] then
+            level_assets[asset_types.MUSIC]:play()
+        end
+    end
+
+    
     return level_assets
 end
 

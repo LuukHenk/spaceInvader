@@ -1,14 +1,9 @@
 local level_base_class = {}
 
-function level_base_class.construct()
+function level_base_class.construct(assets)
     local level = {}
-    -- abstract
-    level.objects_to_spawn = {}
-    level.assets = nil
-
-    -- abstract
-    function level.construct(assets)
-    end
+    level.assets = assets
+    level.objects = {}
     return level
 end
 

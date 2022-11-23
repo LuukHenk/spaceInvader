@@ -65,6 +65,7 @@ function updater.select_active_level(game)
     if game.object_handler.enemies_alive() then return end
 
     game.current_level = game.current_level + 1
+    love.audio.stop()
     local level = game.level_factory.construct_level(game.current_level)
     if not level then
         updater.handle_game_over(game)
@@ -72,6 +73,7 @@ function updater.select_active_level(game)
     end
 
     game.level_assets = level.assets
+    game.level_assets.play_music()
     game.object_handler.add_objects(level.objects)
 end
 
