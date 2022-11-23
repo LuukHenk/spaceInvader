@@ -18,12 +18,12 @@ level_1.objects_to_spawn = {
     -- level_object_spawner.construct(basic_enemy, 0.9, 0)
 }
 
-function level_1.construct()
+function level_1.construct(assets)
+    level_1.assets = assets
     local objects = {}
     for _, object_to_spawn in pairs(level_1.objects_to_spawn) do
         table.insert(objects, object_to_spawn.spawn())
     end
-
     return objects
 end
 
