@@ -14,8 +14,8 @@ game_panel.controls = controls[game_panel.panel_id]
 function game_panel.load()
     game_panel.object_handler = object_handler.construct(game_panel.controls)
     game_panel.level_factory = level_factory.construct()
-    game_panel.level_assets = nil
-    game_panel.current_level = 0
+    game_panel.current_level = nil
+    game_panel.current_level_id = 0
 end
 
 function game_panel.update(dt)

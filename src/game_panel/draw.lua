@@ -2,7 +2,7 @@ local global_draw = require "draw"
 local game_draw = {}
 
 function game_draw.draw_game(game_panel)
-    game_draw.draw_background(game_panel.level_assets.get_background())
+    game_draw.draw_background(game_panel.current_level.get_background())
     game_draw.draw_objects(game_panel.object_handler.get_all_objects())
 end
 

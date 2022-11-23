@@ -4,8 +4,13 @@ local updater = {}
 
 function updater.update_game(dt, game)
     updater.select_active_level(game)
+    updater.update_level(dt, game)
     updater.update_game_objects(dt, game.object_handler)
     updater.check_if_game_over(game)
+end
+
+function updater.update_level(dt, game)
+    game.current_level.update(dt)
 end
 
 function updater.update_game_objects(dt, object_handler)
@@ -64,22 +69,20 @@ function updater.select_active_level(game)
     -- Switches level if needed. Switches panel if all levels are done
     if game.object_handler.enemies_alive() then return end
 
-    game.current_level = game.current_level + 1
+    game.current_level_id = game.current_level_id + 1
     love.audio.stop()
-    local level = game.level_factory.construct_level(game.current_level)
-    if not level then
+    game.current_level = game.level_factory.construct_level(game.current_level_id)
+    if not game.current_level then
         updater.handle_game_over(game)
         return
     end
-
-    game.level_assets = level.assets
-    game.level_assets.play_music()
-    game.object_handler.add_objects(level.objects)
+    game.current_level.play_music()
+    game.object_handler.add_objects(game.current_level.objects)
 end
 
 function updater.handle_game_over(game)
     game.object_handler.reset()
-    game.current_level = 0
+    game.current_level_id = 0
     game.next_active_panel = panel_ids.game_over_panel
 end
 

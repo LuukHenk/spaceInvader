@@ -4,7 +4,7 @@ function level_object_spawner.construct(object, relative_x_coord, releative_y_co
     -- The relative coordinates should be between 0 and 1
     local object_to_spawn = {}
     object_to_spawn.x_coord = relative_x_coord * ScreenWidhtScalingFactor * EXPECTED_SCREEN_WIDTH
-    object_to_spawn.y_coord = releative_y_coord * ScreenHeightScalingFactor * EXPECTED_SCREEN_HEIGHT 
+    object_to_spawn.y_coord = releative_y_coord * ScreenHeightScalingFactor * EXPECTED_SCREEN_HEIGHT
     object_to_spawn.construct = object.construct
 
     function object_to_spawn.spawn()

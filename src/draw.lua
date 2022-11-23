@@ -34,7 +34,7 @@ end
 
 function draw.draw_background(image)
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(image)
+    love.graphics.draw(image, 0, 0, 0, ScreenWidhtScalingFactor, ScreenHeightScalingFactor)
 end
 
 return draw
