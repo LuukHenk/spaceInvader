@@ -10,7 +10,9 @@ function updater.update_game(dt, game)
 end
 
 function updater.update_level(dt, game)
-    game.current_level.update(dt)
+    if game.current_level then
+        game.current_level.update(dt)
+    end
 end
 
 function updater.update_game_objects(dt, object_handler)

@@ -1,4 +1,10 @@
--- love.window.setFullscreen(true, 'desktop')
+DEBUG = true
+
+if DEBUG then
+    love.window.setMode(960, 540)
+else
+    love.window.setFullscreen(true, 'desktop')
+end
 
 EXPECTED_SCREEN_HEIGHT = 1080
 EXPECTED_SCREEN_WIDTH = 1920
@@ -58,4 +64,8 @@ end
 
 function love.draw()
     active_panel_manager.draw()
+    if DEBUG then
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+    end
 end
