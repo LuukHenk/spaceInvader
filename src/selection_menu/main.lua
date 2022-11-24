@@ -10,7 +10,7 @@ local draw = require "selection_menu.draw"
 
 local selection_menu = panel_factory.construct_panel(panel_ids.selection_menu)
 
-selection_menu.controls = controls[selection_menu.panel_id]
+selection_menu.controls = controls.get_selection_menu_controls()
 selection_menu.key_down = false
 
 function selection_menu.load(items, on_select_function)

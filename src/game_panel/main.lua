@@ -9,7 +9,7 @@ local object_handler = require "game_panel.object_handler"
 
 local game_panel = panel_factory.construct_panel(panel_ids.game_panel)
 
-game_panel.controls = controls[game_panel.panel_id]
+game_panel.controls = controls.get_game_panel_controls()
 
 function game_panel.load()
     game_panel.object_handler = object_handler.construct(game_panel.controls)
