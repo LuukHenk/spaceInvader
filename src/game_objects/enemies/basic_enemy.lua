@@ -4,8 +4,8 @@ local object_names = require "object_names"
 local basic_enemy_bullet = require "game_objects.bullets.basic_enemy_bullet"
 local basic_enemy_class = {}
 
-basic_enemy_class.BASIC_ENEMY_WIDTH = 40
-basic_enemy_class.BASIC_ENEMY_HEIGHT = 40
+basic_enemy_class.BASIC_ENEMY_WIDTH = 50
+basic_enemy_class.BASIC_ENEMY_HEIGHT = 50
 function basic_enemy_class.construct(x_coord, y_coord)
     local enemy = shooting_object.construct(
         object_names.basic_enemy, object_types.enemy, x_coord, y_coord
@@ -22,8 +22,24 @@ function basic_enemy_class.construct(x_coord, y_coord)
     enemy.shooting_cooldown = love.math.random(0, enemy.shooting_cooldown_time)
 
     function enemy.update(dt)
-        enemy.move_down(dt)
+        enemy.__move(dt)
         enemy.shoot(dt)
+    end
+
+    function enemy.__move(dt)
+        enemy.__update_horizontal_direction()
+        if enemy.horizontal_movement == 0 then
+            enemy.move_left(dt)
+        elseif enemy.horizontal_movement == 1 then
+            enemy.move_right(dt)
+        end
+        enemy.move_down(dt)
+    end
+
+    function enemy.__update_horizontal_direction()
+        if love.math.random(0, 50) == 0 then
+            enemy.horizontal_movement = love.math.random(0, 2)
+        end
     end
 
     return enemy

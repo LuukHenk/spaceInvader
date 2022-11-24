@@ -23,7 +23,7 @@ function player_class.construct(controls)
     player.speed = 700
 
     player.bullet = player_bullet
-    player.shooting_cooldown_time = 0.5
+    player.shooting_cooldown_time = 0.4
     player.shooting_cooldown = 0
 
     player.controls = controls

@@ -20,7 +20,7 @@ function updater.update_game_objects(dt, object_handler)
     local all_objects = object_handler.get_all_objects()
     for _, object in pairs(all_objects) do
         object.update(dt)
-        updater.handle_object_collision(object, all_objects)
+        updater.handle_object_collision(object, object_handler.get_all_objects())
         updater.remove_if_dead(object, object_handler)
         object_handler.add_objects(object.collect_constructed_game_objects())
 
@@ -45,7 +45,7 @@ function updater.handle_object_combat(object, target)
 end
 
 function updater.remove_if_dead(object, object_handler)
-    if object.lives < 0 then
+    if object.lives <= 0 then
         object_handler.remove_object_by_id(object.id)
     end
 end

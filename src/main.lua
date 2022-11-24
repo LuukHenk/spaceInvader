@@ -1,7 +1,7 @@
-DEBUG = true
+DEBUG = false
 
 if DEBUG then
-    love.window.setMode(960, 540)
+    love.window.setMode(1440, 810)
 else
     love.window.setFullscreen(true, 'desktop')
 end
