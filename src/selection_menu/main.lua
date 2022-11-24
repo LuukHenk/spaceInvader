@@ -1,6 +1,3 @@
-
-local panel_ids = require "panel_manager.panel_ids"
-local panel_factory = require "panel_manager.panel_factory"
 local controls = require "controls"
 local utils = require "utils"
 
@@ -8,8 +5,7 @@ local updater = require "selection_menu.updater"
 local loader = require "selection_menu.loader"
 local draw = require "selection_menu.draw"
 
-local selection_menu = panel_factory.construct_panel(panel_ids.selection_menu)
-
+local selection_menu = {}
 selection_menu.controls = controls.get_selection_menu_controls()
 selection_menu.key_down = false
 
