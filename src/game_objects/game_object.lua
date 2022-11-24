@@ -45,12 +45,16 @@ function game_object_class.construct(object_name, object_type, x_coord, y_coord)
     end
     
     function game_object.move_right(dt)
+        if game_object.width + game_object.coordinates.x >= love.graphics.getWidth() then
+            return
+         end
         game_object.coordinates.x = (
             game_object.coordinates.x + game_object.speed * dt *ScreenHeightScalingFactor
         )
     end
 
     function game_object.move_left(dt)
+        if game_object.coordinates.x <= 0 then return end
         game_object.coordinates.x = (
             game_object.coordinates.x - game_object.speed * dt *ScreenHeightScalingFactor
         )

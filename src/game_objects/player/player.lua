@@ -36,11 +36,10 @@ function player_class.construct(controls)
 
     function player.move(dt)
         local direction = 0
-        if love.keyboard.isDown(player.controls.move_left) and player.coordinates.x > 0 then
+        if love.keyboard.isDown(player.controls.move_left) then
             direction = direction - 1
         end
-        local right_movement_valid = player.width + player.coordinates.x < love.graphics.getWidth()
-        if love.keyboard.isDown(player.controls.move_right) and right_movement_valid then
+        if love.keyboard.isDown(player.controls.move_right) then
             direction = direction + 1
         end
 
