@@ -1,10 +1,10 @@
 local bullet_object = require "game_objects.bullet"
-local object_names = require "object_names"
+local game_object_names = require "game_objects.game_object_names"
 local basic_enemy_bullet_class = {}
 
 function basic_enemy_bullet_class.construct(object_type, x_coord, y_coord)
     local bullet = bullet_object.construct(
-        object_names.basic_enemy_bullet, object_type, x_coord, y_coord
+        game_object_names.basic_enemy_bullet, object_type, x_coord, y_coord
     )
 
     bullet.set_color(0, 0, 0, 1)

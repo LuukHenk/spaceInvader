@@ -18,6 +18,7 @@ function game_object_class.construct(object_name, object_type, x_coord, y_coord)
     game_object.lives = 1
     game_object.strength = 1
     game_object.division = object_type
+    game_object.assets = nil
     game_object.constructed_game_objects = {}
 
     --abstract
