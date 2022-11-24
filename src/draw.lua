@@ -33,7 +33,7 @@ function draw.draw_panel_title(text)
 end
 
 function draw.draw_background(image)
-    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setColor(0.4, 0.4, 0.4, 1)
     love.graphics.draw(image, 0, 0, 0, ScreenWidhtScalingFactor, ScreenHeightScalingFactor)
 end
 

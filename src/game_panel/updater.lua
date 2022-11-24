@@ -96,9 +96,17 @@ function updater.check_if_level_over(game)
 end
 
 function updater.handle_game_over(game)
+    if game.current_level then
+        game.current_level.stop_music()
+    else
+        love.audio.stop()
+    end
+    updater.__reset_game(game)
+end
+
+function updater.__reset_game(game)
     game.object_handler.reset()
     game.current_level_id = 0
-    game.current_level.stop_music()
     game.next_active_panel = panel_ids.game_over_panel
 end
 

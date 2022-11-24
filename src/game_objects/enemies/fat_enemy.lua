@@ -4,6 +4,7 @@ local game_object_names = require "game_objects.game_object_names"
 local basic_enemy_bullet = require "game_objects.bullets.basic_enemy_bullet"
 local fat_enemy_class = {}
 
+fat_enemy_class.SHOOTING_COOLDOWN_TIME = 1
 fat_enemy_class.LIVES = 10
 fat_enemy_class.FAT_ENEMY_HEIGHT = 80
 fat_enemy_class.FAT_ENEMY_WIDTH = 80
@@ -18,7 +19,7 @@ function fat_enemy_class.construct(x_coord, y_coord)
     enemy.lives = fat_enemy_class.LIVES
     enemy.speed = 80
     enemy.bullet = basic_enemy_bullet
-    enemy.shooting_cooldown_time = 2
+    enemy.shooting_cooldown_time = fat_enemy_class.SHOOTING_COOLDOWN_TIME
     enemy.shooting_cooldown = love.math.random(0, enemy.shooting_cooldown_time)
     enemy.horizontal_movement = 0
 
@@ -26,10 +27,18 @@ function fat_enemy_class.construct(x_coord, y_coord)
         enemy.__move(dt)
         enemy.shoot(dt)
         enemy.__update_color()
+        enemy.__update_shooting_cooldown_time()
     end
 
     function enemy.__update_color()
         enemy.color.red = 1-enemy.lives / fat_enemy_class.LIVES
+    end
+
+    function enemy.__update_shooting_cooldown_time()
+        enemy.shooting_cooldown_time = (
+            fat_enemy_class.SHOOTING_COOLDOWN_TIME + (enemy.lives / fat_enemy_class.LIVES)
+        )
+        print(enemy.shooting_cooldown_time)
     end
 
     function enemy.__move(dt)
