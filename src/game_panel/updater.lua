@@ -46,6 +46,7 @@ end
 
 function updater.remove_if_dead(object, object_handler)
     if object.lives <= 0 then
+        object.play_die_sound()
         object_handler.remove_object_by_id(object.id)
     end
 end
@@ -53,15 +54,16 @@ end
 function updater.check_if_game_over(game)
     if (
         not game.object_handler.player
-        or updater.check_if_enemies_reached_earth(game.object_handler.enemies)
+        or updater.check_if_enemies_reached_earth(game.object_handler)
     ) then
         updater.handle_game_over(game)
     end
 end
 
-function updater.check_if_enemies_reached_earth(enemies)
-    for _, enemy in pairs(enemies) do
-        if enemy.coordinates.y > love.graphics.getHeight() then
+function updater.check_if_enemies_reached_earth(object_handler)
+    for _, enemy in pairs(object_handler.enemies) do
+        if enemy.coordinates.y + enemy.height > love.graphics.getHeight() then
+            object_handler.player.play_die_sound()
             return true
         end
     end
@@ -73,13 +75,13 @@ function updater.select_active_level(game)
     if not updater.check_if_level_over(game) then return end
 
     game.current_level_id = game.current_level_id + 1
-    love.audio.stop()
     game.current_level = game.level_factory.construct_level(game.current_level_id)
 
     if not game.current_level then
         updater.handle_game_over(game)
         return
     end
+    love.audio.stop()
     game.current_level.play_music()
 end
 
@@ -96,7 +98,7 @@ end
 function updater.handle_game_over(game)
     game.object_handler.reset()
     game.current_level_id = 0
-    love.audio.stop()
+    game.current_level.stop_music()
     game.next_active_panel = panel_ids.game_over_panel
 end
 

@@ -22,7 +22,12 @@ function level_assets_class.construct(level_object_name, assets_handler)
         end
     end
 
-    
+    function level_assets.stop_music()
+        if level_assets[asset_types.MUSIC] then
+            level_assets[asset_types.MUSIC]:stop()
+        end
+    end
+
     return level_assets
 end
 

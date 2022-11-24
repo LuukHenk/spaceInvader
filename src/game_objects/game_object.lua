@@ -25,6 +25,12 @@ function game_object_class.construct(object_name, object_type, x_coord, y_coord)
     function game_object.update(dt)
     end
 
+    function game_object.play_die_sound()
+        if game_object.assets then
+            game_object.assets.play_die_sound()
+        end
+    end
+
     function game_object.collect_constructed_game_objects()
         local constructed_objects = game_object.constructed_game_objects
         game_object.constructed_game_objects = {}

@@ -52,6 +52,10 @@ function level_base_class.construct(assets)
         assets.play_music()
     end
 
+    function level.stop_music()
+        assets.stop_music()
+    end
+
     return level
 end
 
