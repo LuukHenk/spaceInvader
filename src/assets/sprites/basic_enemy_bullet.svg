@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="8"
+   height="40"
+   viewBox="0 0 2.1166666 10.583333"
+   version="1.1"
+   id="svg892"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="basic_enemy_bullet.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview894"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="false"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:showpageshadow="false"
+     borderlayer="true"
+     showborder="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-global="true"
+     inkscape:snap-others="true"
+     inkscape:snap-to-guides="true"
+     inkscape:snap-grids="true"
+     units="px"
+     inkscape:snap-bbox-midpoints="false"
+     inkscape:zoom="12.030079"
+     inkscape:cx="-21.529369"
+     inkscape:cy="25.145306"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1049"
+       dotted="false"
+       spacingx="0.52916664"
+       spacingy="0.52916664" />
+  </sodipodi:namedview>
+  <defs
+     id="defs889" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#d35f5f;stroke-width:0"
+       id="rect4443"
+       width="0.52916664"
+       height="9.5249996"
+       x="1.5874999"
+       y="0.52916664" />
+    <rect
+       style="fill:#d35f5f;stroke-width:0"
+       id="rect4445"
+       width="0.52916664"
+       height="9.5249996"
+       x="0"
+       y="0.52916664" />
+    <rect
+       style="fill:#d35f5f;stroke-width:0"
+       id="rect4491"
+       width="1.0583333"
+       height="0.52916664"
+       x="0.52916664"
+       y="10.054166" />
+    <rect
+       style="fill:#d35f5f;stroke-width:0"
+       id="rect4493"
+       width="1.0583333"
+       height="0.52916664"
+       x="0.52916664"
+       y="0" />
+    <rect
+       style="fill:#f4d7d7;stroke-width:0"
+       id="rect4619"
+       width="1.0583333"
+       height="9.5249996"
+       x="0.52916664"
+       y="0.52916664" />
+  </g>
+</svg>

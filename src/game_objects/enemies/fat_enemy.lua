@@ -14,7 +14,7 @@ function fat_enemy_class.construct(x_coord, y_coord)
     )
 
     enemy.resize(fat_enemy_class.FAT_ENEMY_WIDTH, fat_enemy_class.FAT_ENEMY_HEIGHT)
-    enemy.set_color(0, 0, 0, 1)
+    enemy.set_color(0, 1, 1, 1)
     enemy.lives = fat_enemy_class.LIVES
     enemy.speed = 80
     enemy.bullet = basic_enemy_bullet
