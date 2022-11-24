@@ -13,12 +13,12 @@ function player_class.construct(controls)
         love.graphics.getWidth() / 2,
         love.graphics.getHeight()
     )
-    player.resize(50, 15)
+    player.resize(80, 25)
     player.set_coordinates(
         player.coordinates.x - player.width / 2, 
         player.coordinates.y - player.height
     )
-    player.set_color(1, 0.31, 0, 1)
+    player.set_color(1, 1, 1, 1)
     
     player.speed = 700
 
