@@ -38,7 +38,6 @@ function fat_enemy_class.construct(x_coord, y_coord)
         enemy.shooting_cooldown_time = (
             fat_enemy_class.SHOOTING_COOLDOWN_TIME + (enemy.lives / fat_enemy_class.LIVES)
         )
-        print(enemy.shooting_cooldown_time)
     end
 
     function enemy.__move(dt)
