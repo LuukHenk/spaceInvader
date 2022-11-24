@@ -17,6 +17,7 @@ function shooting_object_class.construct(object_name, object_type, x_coord, y_co
             return
         end
         if gun_inactive then return end
+        shooting_object.play_shoot_sound()
         shooting_object.shooting_cooldown = shooting_object.shooting_cooldown_time
         shooting_object.spawn_bullet()
     end

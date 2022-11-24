@@ -21,6 +21,10 @@ function game_object_assets_class.construct(level_object_name, assets_handler)
         return game_object_assets[asset_types.SPRITE]
     end
 
+    function game_object_assets.play_shoot_sound()
+        game_object_assets.__play_sound_effect(sound_effect_names.SHOOT)
+    end
+
     function game_object_assets.play_die_sound()
         game_object_assets.__play_sound_effect(sound_effect_names.DIE)
     end

@@ -9,6 +9,7 @@ local SPRITE_FOLDER = "assets/sprites/"
 local BACKGROUND_FOLDER = "assets/backgrounds/"
 local MUSIC_FOLDER = "assets/music/"
 local SOUND_EFFECTS_FOLDER = "assets/sound_effects/"
+local DEFAULT_SOUND_EFFECT = SOUND_EFFECTS_FOLDER .. "default" ..SOUND_EFFECTS_EXTENSION_TYPE
 
 function assets_handler_class.construct()
     local assets_handler = {}
@@ -17,6 +18,9 @@ function assets_handler_class.construct()
         local folder, extension = assets_handler.__folder_selection(asset_type) 
         local path = folder .. object_name .. extension
         if not assets_handler.__check_if_file_exists(path) then
+            if asset_type == asset_types.SOUND_EFFECTS then
+                return assets_handler.__load_asset(asset_type, DEFAULT_SOUND_EFFECT)
+            end
             print(
                 "Warning: Unable to find " .. asset_type .. " for " .. object_name .. " at " .. path
             )
