@@ -37,4 +37,21 @@ function draw.draw_background(image)
     love.graphics.draw(image, 0, 0, 0, ScreenWidhtScalingFactor, ScreenHeightScalingFactor)
 end
 
+function draw.draw_sprite(image, object)
+    love.graphics.setColor(
+        object.color.red,
+        object.color.green,
+        object.color.blue,
+        object.color.alpha
+    )
+    love.graphics.draw(
+        image,
+        object.coordinates.x,
+        object.coordinates.y,
+        0,
+        ScreenWidhtScalingFactor,
+        ScreenHeightScalingFactor
+    )
+end
+
 return draw

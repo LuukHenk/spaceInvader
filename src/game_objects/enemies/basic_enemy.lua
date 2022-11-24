@@ -15,7 +15,7 @@ function basic_enemy_class.construct(x_coord, y_coord)
         basic_enemy_class.BASIC_ENEMY_WIDTH,
         basic_enemy_class.BASIC_ENEMY_HEIGHT
     )
-    enemy.set_color(0, 1, 0, 1)
+    enemy.set_color(1, 1, 1 , 1)
     enemy.speed = 25
     enemy.bullet = basic_enemy_bullet
     enemy.shooting_cooldown_time = 10

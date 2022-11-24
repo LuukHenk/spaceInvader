@@ -10,7 +10,16 @@ function game_draw.draw_game(game_panel)
 end
 
 function game_draw.draw_objects(game_objects)
-    global_draw.draw_multiple_rectangles(game_objects)
+    for _, object in pairs(game_objects) do
+        if DEBUG then
+            global_draw.draw_rectangle(object)
+        end
+        if object.assets and object.assets.get_sprite() then
+            global_draw.draw_sprite(object.assets.get_sprite(), object)           
+        else
+            global_draw.draw_rectangle(object)
+        end
+    end
 end
 
 function game_draw.draw_background(background)
