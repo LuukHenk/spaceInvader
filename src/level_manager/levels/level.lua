@@ -2,17 +2,36 @@ local level_base_class = {}
 
 function level_base_class.construct(assets)
     local level = {}
-    level.assets = assets
-    level.start_time = love.timer.getTime()
-    level.in_level_time = love.timer.getTime() - level.start_time
 
-    level.all_waves_spawned = false
-    level.constructed_enemies = {}
+    function level.__init__()
+        level.assets = assets
+        level.start_time = love.timer.getTime()
+        level.pause_time = 0
+        level.start_pause_timer = nil
+        level.in_level_time = level.__calculate_in_level_time()
+
+        level.all_waves_spawned = false
+        level.constructed_enemies = {}
+    end
 
     function level.update(dt)
-        level.in_level_time = (love.timer.getTime() - level.start_time) * dt
+        level.in_level_time = level.__calculate_in_level_time() * dt
         level.__spawn_new_enemies()
         level.__check_if_all_waves_spawned()
+    end
+
+    function level.pause()
+        assets.pause_music()
+        level.start_pause_timer = love.timer.getTime()
+    end
+
+    function level.continue()
+        assets.play_music()
+        level.pause_time = level.pause_time + love.timer.getTime() - level.start_pause_timer
+    end
+
+    function level.__calculate_in_level_time()
+        return love.timer.getTime() - level.start_time - level.pause_time
     end
 
     function level.__spawn_new_enemies()
@@ -56,6 +75,7 @@ function level_base_class.construct(assets)
         assets.stop_music()
     end
 
+    level.__init__()
     return level
 end
 

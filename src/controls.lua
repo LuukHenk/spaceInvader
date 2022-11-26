@@ -29,6 +29,7 @@ function controls.__construct_game_panel_controls()
     game_panel_controls.shoot = { "space" }
     game_panel_controls.move_left = { "left", "a" }
     game_panel_controls.move_right = { "right", "d" }
+    game_panel_controls.pause = {"escape"}
 
     game_panel_controls.all = controls.__get_all_control_keys_of_object(game_panel_controls)
     return game_panel_controls

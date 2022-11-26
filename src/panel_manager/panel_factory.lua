@@ -12,11 +12,15 @@ function panel_factory.construct_panel(panel_id)
     --abstract
     function panel.update(dt)
     end
-    
+
     --abstract
     function panel.draw()
     end
-    
+
+    --abstract
+    function panel.on_activation(previous_panel_id)
+    end
+
     return panel
 end
 

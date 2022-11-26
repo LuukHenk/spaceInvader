@@ -3,10 +3,20 @@ local panel_ids = require "panel_manager.panel_ids"
 local updater = {}
 
 function updater.update_game(dt, game)
+    updater.check_for_pause(game)
     updater.select_active_level(game)
     updater.update_level(dt, game)
     updater.update_game_objects(dt, game.object_handler)
     updater.check_if_game_over(game)
+end
+
+function updater.check_for_pause(game)
+    if love.keyboard.isDown(game.controls.pause) then
+        game.next_active_panel = panel_ids.pause_panel
+        if game.current_level then
+            game.current_level.pause()
+        end
+    end
 end
 
 function updater.update_level(dt, game)
@@ -73,7 +83,6 @@ end
 function updater.select_active_level(game)
     -- Switches level if needed. Switches panel if all levels are done
     if not updater.check_if_level_over(game) then return end
-
     game.current_level_id = game.current_level_id + 1
     game.current_level = game.level_factory.construct_level(game.current_level_id)
 
@@ -101,13 +110,14 @@ function updater.handle_game_over(game)
     else
         love.audio.stop()
     end
-    updater.__reset_game(game)
+    updater.reset_game(game)
+    game.next_active_panel = panel_ids.game_over_panel
 end
 
-function updater.__reset_game(game)
+function updater.reset_game(game)
     game.object_handler.reset()
+    game.current_level = nil
     game.current_level_id = 0
-    game.next_active_panel = panel_ids.game_over_panel
 end
 
 function updater.check_for_collision(object, target)

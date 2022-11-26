@@ -26,4 +26,12 @@ function game_panel.draw()
     draw.draw_game(game_panel)
 end
 
+function game_panel.on_activation(previous_panel_id)
+    if previous_panel_id == panel_ids.pause_panel and game_panel.current_level then
+        game_panel.current_level.continue()
+        return
+    end
+    updater.reset_game(game_panel)
+end
+
 return game_panel
