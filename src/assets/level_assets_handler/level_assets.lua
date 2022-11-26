@@ -24,7 +24,6 @@ function level_assets_class.construct(level_object_name, assets_handler)
 
     function level_assets.stop_music()
         if level_assets[asset_types.MUSIC] then
-            print("stopped music")
             level_assets[asset_types.MUSIC]:stop()
         end
     end

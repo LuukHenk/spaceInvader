@@ -4,10 +4,6 @@ local draw = require "draw"
 
 local basic_panel = panel_factory.construct_panel(panel_ids.basic_panel)
 
-function basic_panel.load()
-    print("loaded basic panel")
-end
-
 function basic_panel.draw()
     draw.draw_panel_title("This is a basic page")
 end

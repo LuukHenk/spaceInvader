@@ -18,7 +18,7 @@ function controls.__construct_menu_controls()
     local menu_controls = {}
     menu_controls.move_up = {"up", "w"}
     menu_controls.move_down = {"down", "s"}
-    menu_controls.select = {"return", "space"}
+    menu_controls.select = {"return"}
 
     menu_controls.all = controls.__get_all_control_keys_of_object(menu_controls)
     return menu_controls

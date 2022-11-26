@@ -1,5 +1,5 @@
 local panel_ids = require "panel_manager.panel_ids"
-
+local notifications = require "panel_manager.notifications"
 local updater = {}
 
 function updater.update_game(dt, game)
@@ -66,6 +66,7 @@ function updater.check_if_game_over(game)
         not game.object_handler.player
         or updater.check_if_enemies_reached_earth(game.object_handler)
     ) then
+        game.notification = notifications.GAME_LOST
         updater.handle_game_over(game)
     end
 end
@@ -87,6 +88,7 @@ function updater.select_active_level(game)
     game.current_level = game.level_factory.construct_level(game.current_level_id)
 
     if not game.current_level then
+        game.notification = notifications.GAME_WON
         updater.handle_game_over(game)
         return
     end
