@@ -30,7 +30,7 @@ function active_panel_manager.select_next_active_panel()
         local new_panel = panels[panel.next_active_panel]
         new_panel.next_active_panel = new_panel.panel_id
         active_panel_manager.active_panel = new_panel
-        new_panel.on_activation(panel.panel_id)
+        new_panel.on_activation(panel.panel_id, panel.notification)
     end
 end
 return active_panel_manager

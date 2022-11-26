@@ -1,4 +1,5 @@
 local controls = require "controls"
+local notifications = require "panel_manager.notifications"
 local panel_ids = require "panel_manager.panel_ids"
 local panel_factory = require "panel_manager.panel_factory"
 local level_factory = require "level_manager.level_factory"
@@ -26,8 +27,12 @@ function game_panel.draw()
     draw.draw_game(game_panel)
 end
 
-function game_panel.on_activation(previous_panel_id)
-    if previous_panel_id == panel_ids.pause_panel and game_panel.current_level then
+function game_panel.on_activation(previous_panel_id, notification)
+    if (
+        previous_panel_id == panel_ids.pause_panel 
+        and notification == notifications.RESUME 
+        and game_panel.current_level 
+    ) then 
         game_panel.current_level.continue()
         return
     end

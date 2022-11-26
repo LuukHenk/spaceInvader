@@ -4,6 +4,7 @@ function panel_factory.construct_panel(panel_id)
     local panel = {}
     panel.panel_id = panel_id
     panel.next_active_panel = panel.panel_id
+    panel.notification = nil
 
     --abstract
     function panel.load()
@@ -18,7 +19,7 @@ function panel_factory.construct_panel(panel_id)
     end
 
     --abstract
-    function panel.on_activation(previous_panel_id)
+    function panel.on_activation(previous_panel_id, notification)
     end
 
     return panel
