@@ -12,16 +12,18 @@ local SELECTION_MENU_ITEMS = {START_GAME_TEXT, SETTINGS_TEXT, QUIT_TEXT}
 local TITLE_TEXT = "Space invaders"
 
 function main_menu_panel.load()
-    selection_menu.load(SELECTION_MENU_ITEMS, main_menu_panel.on_selection)
+    main_menu_panel.selection_menu = selection_menu.construct(
+        SELECTION_MENU_ITEMS, main_menu_panel.on_selection
+    )
 end
 
 function main_menu_panel.update(dt)
-    selection_menu.update(dt)
+    main_menu_panel.selection_menu.update()
 end
 
 function main_menu_panel.draw()
     draw.draw_panel_title(TITLE_TEXT)
-    selection_menu.draw()
+    main_menu_panel.selection_menu.draw()
 end
 
 function main_menu_panel.on_selection(selection)

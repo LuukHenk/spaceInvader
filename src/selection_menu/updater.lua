@@ -11,17 +11,23 @@ function updater.check_selected_item(selection_menu)
         return
     end
 
-    if not selection_menu.key_down then
-        if love.keyboard.isDown(selection_menu.controls.select) then
-            selection_menu.key_down = true
-            updater.on_select(selection_menu)
-        elseif love.keyboard.isDown(selection_menu.controls.move_down) then
-            selection_menu.key_down = true
-            updater.go_to_next_item(selection_menu)
-        elseif love.keyboard.isDown(selection_menu.controls.move_up) then
-            selection_menu.key_down = true
-            updater.go_to_previous_item(selection_menu)
+    if love.keyboard.isDown(selection_menu.controls.all) then
+        if not selection_menu.key_down then
+            updater.__handle_keypress(selection_menu)
         end
+        selection_menu.key_down = true
+    else
+        selection_menu.key_down = false
+    end
+end
+
+function updater.__handle_keypress(selection_menu)
+    if love.keyboard.isDown(selection_menu.controls.select) then
+        updater.on_select(selection_menu)
+    elseif love.keyboard.isDown(selection_menu.controls.move_down) then
+        updater.go_to_next_item(selection_menu)
+    elseif love.keyboard.isDown(selection_menu.controls.move_up) then
+        updater.go_to_previous_item(selection_menu)
     end
 end
 

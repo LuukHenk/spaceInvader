@@ -11,16 +11,18 @@ local START_OVER_TEXT = "Start over"
 local SELECTION_MENU_ITEMS = {RETURN_TO_MAIN_MENU_TEXT, START_OVER_TEXT}
 
 function game_over_panel.load()
-    selection_menu.load(SELECTION_MENU_ITEMS, game_over_panel.on_selection)
+    game_over_panel.selection_menu = selection_menu.construct(
+        SELECTION_MENU_ITEMS, game_over_panel.on_selection
+    )
 end
 
 function game_over_panel.update(dt)
-    selection_menu.update(dt)
+    game_over_panel.selection_menu.update()
 end
 
 function game_over_panel.draw()
     draw.draw_panel_title(GAME_OVER_TEXT)
-    selection_menu.draw()
+    game_over_panel.selection_menu.draw()
 end
 
 function game_over_panel.on_selection(selection)
