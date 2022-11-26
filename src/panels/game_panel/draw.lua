@@ -5,7 +5,7 @@ function game_draw.draw_game(game_panel)
     if not game_panel.current_level then
         return
     end
-    game_draw.draw_background(game_panel.current_level.get_background())
+    game_panel.current_level.draw_background()
     game_draw.draw_objects(game_panel.object_handler.get_all_objects())
 end
 
@@ -19,12 +19,6 @@ function game_draw.draw_objects(game_objects)
         else
             global_draw.draw_rectangle(object)
         end
-    end
-end
-
-function game_draw.draw_background(background)
-    if background then
-        global_draw.draw_background(background)
     end
 end
 

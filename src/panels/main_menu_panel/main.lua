@@ -1,4 +1,5 @@
 local selection_menu = require "selection_menu.main"
+local assets_handler = require "asset_handlers.panel_assets_handler"
 local panel_ids = require "panel_manager.panel_ids"
 local panel = require "panel_manager.panel"
 local draw = require "draw"
@@ -15,6 +16,7 @@ function main_menu_panel_class.construct(panel_id)
     local main_menu_panel = panel.construct(panel_id)
 
     function main_menu_panel.__init__()
+        main_menu_panel.assets_handler = assets_handler.construct("level_1")
         main_menu_panel.selection_menu = selection_menu.construct(
             SELECTION_MENU_ITEMS, main_menu_panel.on_selection
         )
@@ -25,6 +27,7 @@ function main_menu_panel_class.construct(panel_id)
     end
 
     function main_menu_panel.draw()
+        main_menu_panel.assets_handler.draw_background()
         draw.draw_panel_title(TITLE_TEXT)
         main_menu_panel.selection_menu.draw()
     end

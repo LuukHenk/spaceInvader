@@ -63,8 +63,8 @@ function level_base_class.construct(assets)
 
 
     -- Pass asset objects
-    function level.get_background()
-        return assets.get_background()
+    function level.draw_background()
+        return assets.draw_background()
     end
 
     function level.play_music()

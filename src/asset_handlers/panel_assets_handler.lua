@@ -1,5 +1,6 @@
 local asset_types = require "assets.asset_types"
 local assets_loader = require "assets.assets_loader"
+local draw = require "draw"
 
 local panel_assets_handler_class = {}
 
@@ -17,8 +18,10 @@ function panel_assets_handler_class.construct(level_object_name)
         )
     end
 
-    function panel_assets_handler.get_background()
-        return panel_assets_handler.background_image
+    function panel_assets_handler.draw_background()
+        if panel_assets_handler.background_image then
+            draw.draw_background(panel_assets_handler.background_image)
+        end
     end
 
     function panel_assets_handler.play_music()
