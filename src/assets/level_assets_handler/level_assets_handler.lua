@@ -1,5 +1,5 @@
 local assets_handler_class = require "assets.assets_handler"
-local level_assets_class = require "assets.level_assets_handler.level_assets"
+local level_assets_class = require "assets.panel_assets"
 
 local level_assets_handler_class = {}
 
