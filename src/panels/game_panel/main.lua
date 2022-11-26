@@ -30,9 +30,9 @@ function game_panel_class.construct(panel_id)
 
     function game_panel.on_activation(previous_panel_id, notification)
         if (
-            previous_panel_id == panel_ids.pause_panel 
-            and notification == notifications.RESUME 
-            and game_panel.current_level 
+            previous_panel_id == panel_ids.pause_panel
+            and notification == notifications.RESUME
+            and game_panel.current_level
         ) then 
             game_panel.current_level.continue()
             return
