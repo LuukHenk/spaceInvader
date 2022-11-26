@@ -52,6 +52,7 @@ end
 function updater.on_select(selection_menu)
     for item_index, item in pairs(selection_menu.items) do
         if item_index == selection_menu.selected_item then
+            updater.__select_first_item(selection_menu)
             selection_menu.on_select_function(item.type)
         end
     end
@@ -65,6 +66,11 @@ function updater.update_selected_item(selection_menu)
             item.selected = false
         end
     end
+end
+
+function updater.__select_first_item(selection_menu)
+    selection_menu.selected_item = 1
+    updater.update_selected_item(selection_menu)
 end
 
 return updater

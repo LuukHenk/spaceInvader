@@ -8,7 +8,9 @@ local default_active_panel =  panel_ids.main_menu_panel
 active_panel_manager.active_panel = panels[default_active_panel]
 
 function active_panel_manager.load()
-    active_panel_manager.active_panel.load()
+    for _, panel_id in pairs(panel_ids) do
+        panels[panel_id].load()
+    end
 end
 
 function active_panel_manager.update(dt)
@@ -28,7 +30,7 @@ function active_panel_manager.select_next_active_panel()
         local new_panel = panels[panel.next_active_panel]
         new_panel.next_active_panel = new_panel.panel_id
         active_panel_manager.active_panel = new_panel
-        active_panel_manager.load()
+        -- active_panel_manager.load()
     end
 end
 return active_panel_manager

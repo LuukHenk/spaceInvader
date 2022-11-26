@@ -23,7 +23,7 @@ function selection_menu_class.construct(items, on_select_function)
     function selection_menu.update()
         updater.check_selected_item(selection_menu)
     end
-    
+
     function selection_menu.draw()
         draw.draw_selection_menu(selection_menu)
     end
