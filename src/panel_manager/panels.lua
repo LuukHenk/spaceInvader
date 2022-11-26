@@ -1,10 +1,10 @@
 -- Holds all panels
 
 local panel_ids = require "panel_manager.panel_ids"
-local basic_panel = require "basic_panel.main"
-local game_panel = require "game_panel.main"
-local game_over_panel = require "game_over_panel.main"
-local main_menu_panel = require "main_menu_panel.main"
+local basic_panel = require "panels.basic_panel.main"
+local game_panel = require "panels.game_panel.main"
+local game_over_panel = require "panels.game_over_panel.main"
+local main_menu_panel = require "panels.main_menu_panel.main"
 
 local panels = {}
 

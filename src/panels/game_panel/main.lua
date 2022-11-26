@@ -3,9 +3,9 @@ local panel_ids = require "panel_manager.panel_ids"
 local panel_factory = require "panel_manager.panel_factory"
 local level_factory = require "level_manager.level_factory"
     
-local draw = require "game_panel.draw"
-local updater = require "game_panel.updater"
-local object_handler = require "game_panel.object_handler"
+local draw = require "panels.game_panel.draw"
+local updater = require "panels.game_panel.updater"
+local object_handler = require "panels.game_panel.object_handler"
 
 local game_panel = panel_factory.construct_panel(panel_ids.game_panel)
 
