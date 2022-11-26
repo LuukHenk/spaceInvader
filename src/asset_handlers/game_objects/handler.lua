@@ -1,14 +1,15 @@
 local asset_types = require "assets.asset_types"
+local assets_loader = require "assets.assets_loader"
 local sound_effect_names = require "asset_handlers.game_objects.sound_effect_names"
 
 local handler_class = {}
 
 
-function handler_class.construct(level_object_name, assets_loader)
+function handler_class.construct(level_object_name)
     local handler = {}
 
-    function handler.__init__(assets_loader_)
-        handler.assets_loader = assets_loader_
+    function handler.__init__()
+        handler.assets_loader = assets_loader.construct()
         handler[asset_types.SOUND_EFFECTS] = handler.__get_sound_effects(
             level_object_name
         )
@@ -49,7 +50,7 @@ function handler_class.construct(level_object_name, assets_loader)
         return sound_effects
     end
 
-    handler.__init__(assets_loader)
+    handler.__init__()
     return handler
 end
 
