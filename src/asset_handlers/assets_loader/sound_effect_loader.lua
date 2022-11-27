@@ -1,7 +1,7 @@
 
 local basic_loader = require "asset_handlers.assets_loader.basic_loader" 
 
-local FOLDER = "assets/sound_effects/"
+local FOLDER = "sound_effects/"
 local EXTENSION_TYPE = ".wav"
 
 

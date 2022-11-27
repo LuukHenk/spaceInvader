@@ -1,7 +1,7 @@
 
 local basic_loader = require "asset_handlers.assets_loader.basic_loader" 
 
-local FOLDER = "assets/music/"
+local FOLDER = "music/"
 local EXTENSION_TYPE = ".mp3"
 
 local music_loader_class = {}

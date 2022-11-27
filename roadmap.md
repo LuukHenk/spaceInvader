@@ -7,7 +7,7 @@ Created the basic game.
 Reworked the whole engine of the basic game.
 
 7. (Bug) - The text does not scale properly with a smaller or bigger screen
-8. (Bug) - Assets can't be loaded when ran from another directory
+8. (Improvement) - Test everything
 
 # Later
 

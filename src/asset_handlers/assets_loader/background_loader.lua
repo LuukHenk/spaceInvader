@@ -1,7 +1,7 @@
 
 local basic_loader = require "asset_handlers.assets_loader.basic_loader" 
 
-local FOLDER = "assets/backgrounds/"
+local FOLDER = "backgrounds/"
 local EXTENSION_TYPE = ".png"
 
 

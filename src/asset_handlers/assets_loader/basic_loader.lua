@@ -3,6 +3,8 @@
 
 local loader_class = {}
 
+local ASSETS_PATH = "/assets/"
+
 function loader_class.construct(assets_folder, assets_extension, loading_function)
     local loader = {}
 
@@ -13,11 +15,12 @@ function loader_class.construct(assets_folder, assets_extension, loading_functio
     end
 
     function loader.load_asset(asset_name)
-        local path = loader.assets_folder .. asset_name .. loader.assets_extension
-        if loader.__check_if_file_exists(path) then
-            return loader.loading_function(path)
+        local path =  ASSETS_PATH .. loader.assets_folder .. asset_name .. loader.assets_extension
+        local file_content, err =  love.filesystem.newFileData(path)
+        if not err then
+            return loader.loading_function(file_content)
         end
-        print("Warning: Unable to find asset " .. path .. " for " .. asset_name)
+        print("Warning: ".. err)
         return nil
     end
 

@@ -7,7 +7,7 @@ local visualizer = require "visualizer"
 local PAUSE_TEXT = "Game paused"
 local CONTINUE_TEXT = "Continue"
 local RESTART_TEXT = "Restart"
-local RETURN_TO_MAIN_MENU_TEXT = "Return to main menu"
+local RETURN_TO_MAIN_MENU_TEXT = "Main menu"
 local SELECTION_MENU_ITEMS = {CONTINUE_TEXT, RESTART_TEXT, RETURN_TO_MAIN_MENU_TEXT}
 
 local pause_panel_class = {}

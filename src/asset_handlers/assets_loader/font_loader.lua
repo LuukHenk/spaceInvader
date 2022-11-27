@@ -1,7 +1,7 @@
 
 local basic_loader = require "asset_handlers.assets_loader.basic_loader" 
 
-local FOLDER = "assets/fonts/"
+local FOLDER = "fonts/"
 local EXTENSION_TYPE = ".ttf"
 
 local fonts_loader_class = {}

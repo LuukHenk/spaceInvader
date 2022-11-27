@@ -6,7 +6,7 @@ local notifications = require "panel_manager.notifications"
 
 local GAME_OVER_TEXT = "Earth has been captured by aliens."
 local GAME_WON_TEXT = "You have saved earth!"
-local RETURN_TO_MAIN_MENU_TEXT = "Return to main menu"
+local RETURN_TO_MAIN_MENU_TEXT = "Main menu"
 local START_OVER_TEXT = "Start over"
 local SELECTION_MENU_ITEMS = {START_OVER_TEXT, RETURN_TO_MAIN_MENU_TEXT}
 

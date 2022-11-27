@@ -1,7 +1,7 @@
 
 local basic_loader = require "asset_handlers.assets_loader.basic_loader" 
 
-local FOLDER = "assets/sprites/"
+local FOLDER = "sprites/"
 local EXTENSION_TYPE = ".png"
 
 
