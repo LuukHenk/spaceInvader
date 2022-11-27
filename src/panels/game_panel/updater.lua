@@ -1,5 +1,6 @@
 local panel_ids = require "panel_manager.panel_ids"
 local notifications = require "panel_manager.notifications"
+local utils = require "utils"
 local updater = {}
 
 function updater.update_game(dt, game)
@@ -42,7 +43,7 @@ function updater.handle_object_collision(object, targets)
     for _, target in pairs(targets) do
         if (
             object.division ~= target.division
-            and updater.check_for_collision(object, target)
+            and utils.check_for_collision(object, target)
         ) then
             updater.handle_object_combat(object, target)
         end
@@ -122,32 +123,5 @@ function updater.reset_game(game)
     game.current_level_id = 0
 end
 
-function updater.check_for_collision(object, target)
-    if ((
-            object.coordinates.x <= target.coordinates.x
-            and object.coordinates.y <= target.coordinates.y
-            and object.coordinates.x + object.width >= target.coordinates.x
-            and object.coordinates.y + object.height >= target.coordinates.y
-        ) or (
-            object.coordinates.x <= target.coordinates.x
-            and object.coordinates.y >= target.coordinates.y
-            and object.coordinates.x + object.width >= target.coordinates.x
-            and object.coordinates.y <= target.coordinates.y + target.height
-        ) or (
-            object.coordinates.x >= target.coordinates.x
-            and object.coordinates.y <= target.coordinates.y
-            and object.coordinates.x <= target.coordinates.x + target.width
-            and object.coordinates.y + object.height >= target.coordinates.y
-        ) or (
-            object.coordinates.x >= target.coordinates.x
-            and object.coordinates.y >= target.coordinates.y
-            and object.coordinates.x <= target.coordinates.x + target.width
-            and object.coordinates.y <= target.coordinates.y + target.height
-        )
-    ) then
-        return true
-    end
-    return false
-end
 
 return updater

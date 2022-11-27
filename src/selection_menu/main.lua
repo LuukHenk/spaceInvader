@@ -3,8 +3,6 @@ local utils = require "utils"
 local fonts = require "asset_handlers.fonts.fonts"
 
 local item_constructor = require "selection_menu.item_constructor"
-local updater = require "selection_menu.updater"
-local loader = require "selection_menu.loader"
 local draw = require "selection_menu.draw"
 
 local selection_menu_class = {}
@@ -27,11 +25,82 @@ function selection_menu_class.construct(items, on_select_function)
     end
 
     function selection_menu.update()
-        updater.check_selected_item(selection_menu)
+        selection_menu.__check_selected_item()
+        print(love.mouse.getPosition( ))
     end
 
     function selection_menu.draw()
         draw.draw_selection_menu(selection_menu)
+    end
+
+    function selection_menu.__check_selected_item()
+        if (
+            selection_menu.item_count < 2
+            or not selection_menu.selected_item
+        ) then
+            return
+        end
+
+        if love.keyboard.isDown(unpack(selection_menu.controls.all)) then
+            if not selection_menu.key_down then
+                selection_menu.__handle_keypress()
+            end
+            selection_menu.key_down = true
+        else
+            selection_menu.key_down = false
+        end
+    end
+
+    function selection_menu.__handle_keypress()
+        if love.keyboard.isDown(unpack(selection_menu.controls.select)) then
+            selection_menu.__on_select()
+        elseif love.keyboard.isDown(unpack(selection_menu.controls.move_down)) then
+            selection_menu.__go_to_next_item()
+        elseif love.keyboard.isDown(unpack(selection_menu.controls.move_up)) then
+            selection_menu.__go_to_previous_item()
+        end
+    end
+
+    function selection_menu.__go_to_next_item()
+        if selection_menu.selected_item == selection_menu.item_count then
+            selection_menu.selected_item = 1
+        else
+            selection_menu.selected_item = selection_menu.selected_item + 1
+        end
+        selection_menu.__update_selected_item()
+    end
+
+    function selection_menu.__go_to_previous_item()
+        if selection_menu.selected_item == 1 then
+            selection_menu.selected_item = selection_menu.item_count
+        else
+            selection_menu.selected_item = selection_menu.selected_item - 1
+        end
+        selection_menu.__update_selected_item()
+    end
+
+    function selection_menu.__on_select()
+        for item_index, item in pairs(selection_menu.items) do
+            if item_index == selection_menu.selected_item then
+                selection_menu.__select_first_item()
+                selection_menu.on_select_function(item.type)
+            end
+        end
+    end
+
+    function selection_menu.__update_selected_item()
+        for item_index, item in pairs(selection_menu.items) do
+            if item_index == selection_menu.selected_item then
+                item.selected = true
+            else
+                item.selected = false
+            end
+        end
+    end
+
+    function selection_menu.__select_first_item()
+        selection_menu.selected_item = 1
+        selection_menu.__update_selected_item()
     end
 
     function selection_menu.__construct_items()
