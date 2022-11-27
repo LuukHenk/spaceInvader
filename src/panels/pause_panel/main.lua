@@ -2,7 +2,7 @@ local selection_menu = require "selection_menu.main"
 local panel_ids = require "panel_manager.panel_ids"
 local panel = require "panel_manager.panel"
 local notifications = require "panel_manager.notifications"
-local draw = require "draw"
+local visualizer = require "visualizer"
 
 local PAUSE_TEXT = "Game paused"
 local CONTINUE_TEXT = "Continue"
@@ -18,6 +18,7 @@ function pause_panel_class.construct(panel_id)
         pause_panel.selection_menu = selection_menu.construct(
             SELECTION_MENU_ITEMS, pause_panel.on_selection
         )
+        pause_panel.visualizer = visualizer.construct()
     end
 
     function pause_panel.update(dt)
@@ -25,7 +26,7 @@ function pause_panel_class.construct(panel_id)
     end
 
     function pause_panel.draw()
-        draw.draw_panel_title(PAUSE_TEXT)
+        pause_panel.visualizer.draw_panel_title(PAUSE_TEXT)
         pause_panel.selection_menu.draw()
     end
 

@@ -1,7 +1,7 @@
 local selection_menu = require "selection_menu.main"
 local panel_ids = require "panel_manager.panel_ids"
 local panel = require "panel_manager.panel"
-local draw = require "draw"
+local visualizer = require "visualizer"
 local notifications = require "panel_manager.notifications"
 
 local GAME_OVER_TEXT = "Earth has been captured by aliens, good job..."
@@ -20,13 +20,14 @@ function game_over_panel_class.construct(panel_id)
             SELECTION_MENU_ITEMS, game_over_panel.on_selection
         )
         game_over_panel.title = GAME_OVER_TEXT
+        game_over_panel.visualizer = visualizer.construct()
     end
     function game_over_panel.update(dt)
         game_over_panel.selection_menu.update()
     end
     
     function game_over_panel.draw()
-        draw.draw_panel_title(game_over_panel.title)
+        game_over_panel.visualizer.draw_panel_title(game_over_panel.title)
         game_over_panel.selection_menu.draw()
     end
     

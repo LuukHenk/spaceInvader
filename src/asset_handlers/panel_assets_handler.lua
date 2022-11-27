@@ -1,6 +1,6 @@
 local asset_types = require "asset_handlers.assets_loader.asset_types"
 local assets_loader = require "asset_handlers.assets_loader.assets_loader"
-local draw = require "draw"
+local visualizer = require "visualizer"
 
 local panel_assets_handler_class = {}
 
@@ -10,6 +10,7 @@ function panel_assets_handler_class.construct(level_object_name)
 
     function panel_assets_handler.__init__()
         panel_assets_handler.assets_loader = assets_loader.construct()
+        panel_assets_handler.visualizer = visualizer.construct()
         panel_assets_handler.background_image = panel_assets_handler.assets_loader.get_asset(
             asset_types.BACKGROUND, level_object_name
         )
@@ -20,7 +21,7 @@ function panel_assets_handler_class.construct(level_object_name)
 
     function panel_assets_handler.draw_background()
         if panel_assets_handler.background_image then
-            draw.draw_background(panel_assets_handler.background_image)
+            panel_assets_handler.visualizer.draw_background(panel_assets_handler.background_image)
         end
     end
 
