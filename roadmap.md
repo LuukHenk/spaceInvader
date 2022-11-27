@@ -17,3 +17,4 @@ Reworked the whole engine of the basic game.
 3. (Feature) - Let the user dash
 4. (Feature) - Give the user more lives and display lives
 6. (Feature) - Add score
+9. (Improvement) - Rework the main function

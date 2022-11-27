@@ -1,6 +1,8 @@
-DEBUG = false
+DEBUG = true
 
-if DEBUG then
+if DEBUG then    
+    -- love.window.setFullscreen(true, 'desktop')
+
     love.window.setMode(1440, 810)
 else
     love.window.setFullscreen(true, 'desktop')
@@ -67,5 +69,8 @@ function love.draw()
     if DEBUG then
         love.graphics.setColor(1, 1, 1)
         love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+        love.graphics.setColor(1, 0, 0)
+        love.graphics.rectangle("fill", 0, love.graphics.getHeight() / 2 - 1, love.graphics.getWidth(), 2)
+        love.graphics.rectangle("fill", love.graphics.getWidth() / 2 - 1, 0, 2, love.graphics.getHeight())
     end
 end

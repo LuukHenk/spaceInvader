@@ -13,16 +13,7 @@ function selection_menu_draw.draw_selection_menu(selection_menu)
 end
 
 function selection_menu_draw.draw_border(item)
-    if item.selected then
-        love.graphics.setColor(
-            item.selected_color.red,
-            item.selected_color.green,
-            item.selected_color.blue,
-            item.selected_color.alpha
-        )
-    else
-        love.graphics.setColor(0, 0, 0)
-    end
+    love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle(
         item.mode,
         item.coordinates.x,

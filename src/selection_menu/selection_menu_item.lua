@@ -23,10 +23,10 @@ function selection_menu_item.construct(text, x_coord, y_coord)
     item.selected_color.alpha = 1
 
     function item.set_border(border_size)
-        item.border.left = border_size
-        item.border.top = border_size
-        item.border.right = border_size
-        item.border.bottom = border_size
+        item.border.left = border_size * ScreenWidhtScalingFactor
+        item.border.top = border_size * ScreenHeightScalingFactor
+        item.border.right = border_size * ScreenWidhtScalingFactor
+        item.border.bottom = border_size * ScreenHeightScalingFactor
     end
 
     return item
