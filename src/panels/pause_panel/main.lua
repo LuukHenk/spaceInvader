@@ -26,7 +26,7 @@ function pause_panel_class.construct(panel_id)
     end
 
     function pause_panel.draw()
-        pause_panel.visualizer.draw_panel_title(PAUSE_TEXT)
+        pause_panel.visualizer.draw_header(PAUSE_TEXT)
         pause_panel.selection_menu.draw()
     end
 

@@ -2,10 +2,12 @@
 local selection_menu_draw = {}
 
 function selection_menu_draw.draw_selection_menu(selection_menu)
+    selection_menu.fonts.set_selection_menu_font()
     for _, item in pairs(selection_menu.items) do
         selection_menu_draw.draw_border(item)
         selection_menu_draw.draw_text(item)
     end
+    selection_menu.fonts.reset_font()
 end
 
 function selection_menu_draw.draw_border(item)

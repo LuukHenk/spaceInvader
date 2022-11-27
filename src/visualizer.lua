@@ -31,7 +31,19 @@ function visualizer_class.construct()
         )
     end
 
-    function visualizer.draw_panel_title(text)
+    function visualizer.draw_title(text)
+        visualizer.fonts.set_title_font()
+        visualizer.draw_text(text)
+        visualizer.fonts.reset_font()
+    end
+
+    function visualizer.draw_header(text)
+        visualizer.fonts.set_header_font()
+        visualizer.draw_text(text)
+        visualizer.fonts.reset_font()
+    end
+
+    function visualizer.draw_text(text)
         local font = love.graphics.getFont()
         local scaling_factor = 1
         local x_coord = love.graphics.getWidth() * 0.5 - font:getWidth(text)*scaling_factor / 2

@@ -10,7 +10,7 @@ function basic_panel_class.construct(panel_id)
     end
 
     function basic_panel.draw()
-        basic_panel.visualizer.draw_panel_title("Wait, what? How did I end up here")
+        basic_panel.visualizer.draw_header("Wait, what? How did I end up here")
     end
 
     basic_panel.__init__()

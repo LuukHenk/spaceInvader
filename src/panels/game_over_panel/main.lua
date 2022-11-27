@@ -4,8 +4,8 @@ local panel = require "panel_manager.panel"
 local visualizer = require "visualizer"
 local notifications = require "panel_manager.notifications"
 
-local GAME_OVER_TEXT = "Earth has been captured by aliens, good job..."
-local GAME_WON_TEXT = "You have saved earth, good job!"
+local GAME_OVER_TEXT = "Earth has been captured by aliens."
+local GAME_WON_TEXT = "You have saved earth!"
 local RETURN_TO_MAIN_MENU_TEXT = "Return to main menu"
 local START_OVER_TEXT = "Start over"
 local SELECTION_MENU_ITEMS = {RETURN_TO_MAIN_MENU_TEXT, START_OVER_TEXT}
@@ -27,7 +27,7 @@ function game_over_panel_class.construct(panel_id)
     end
     
     function game_over_panel.draw()
-        game_over_panel.visualizer.draw_panel_title(game_over_panel.title)
+        game_over_panel.visualizer.draw_header(game_over_panel.title)
         game_over_panel.selection_menu.draw()
     end
     

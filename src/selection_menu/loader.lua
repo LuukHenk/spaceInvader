@@ -1,10 +1,13 @@
 
 local selection_menu_item = require "selection_menu.selection_menu_item"
 local loader = {}
-local font = love.graphics.getFont()
-local text_heigt = font:getHeight()
+
+
 
 function loader.add_items(selection_menu, items)
+    selection_menu.fonts.set_selection_menu_font()
+    local font = love.graphics.getFont()
+    local text_heigt = font:getHeight()
     local y_coord = selection_menu.y_coordinates
     for item_index, item in pairs(items) do
         local text_width = font:getWidth(item)
@@ -24,6 +27,7 @@ function loader.add_items(selection_menu, items)
 
         table.insert(selection_menu.items, selection_item)
     end
+    selection_menu.fonts.reset_font()
 end
 
 return loader

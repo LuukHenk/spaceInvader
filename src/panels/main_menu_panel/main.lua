@@ -29,7 +29,7 @@ function main_menu_panel_class.construct(panel_id)
 
     function main_menu_panel.draw()
         main_menu_panel.assets_handler.draw_background()
-        main_menu_panel.visualizer.draw_panel_title(TITLE_TEXT)
+        main_menu_panel.visualizer.draw_title(TITLE_TEXT)
         main_menu_panel.selection_menu.draw()
     end
 

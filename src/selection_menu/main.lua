@@ -1,5 +1,6 @@
 local controls = require "controls"
 local utils = require "utils"
+local fonts = require "asset_handlers.fonts.fonts"
 
 local updater = require "selection_menu.updater"
 local loader = require "selection_menu.loader"
@@ -11,8 +12,9 @@ function selection_menu_class.construct(items, on_select_function)
     local selection_menu = {}
 
     selection_menu.controls = controls.get_selection_menu_controls()
+    selection_menu.fonts = fonts.construct()
     selection_menu.key_down = true
-    selection_menu.border_size = 5
+    selection_menu.border_size = 10
     selection_menu.items = {}
     selection_menu.selected_item = nil
     selection_menu.y_coordinates = 400 * ScreenHeightScalingFactor
