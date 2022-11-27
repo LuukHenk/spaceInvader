@@ -1,5 +1,5 @@
-local asset_types = require "assets.asset_types"
-local assets_loader = require "assets.assets_loader"
+local asset_types = require "asset_handlers.assets_loader.asset_types"
+local assets_loader = require "asset_handlers.assets_loader.assets_loader"
 local draw = require "draw"
 
 local panel_assets_handler_class = {}
@@ -10,11 +10,11 @@ function panel_assets_handler_class.construct(level_object_name)
 
     function panel_assets_handler.__init__()
         panel_assets_handler.assets_loader = assets_loader.construct()
-        panel_assets_handler.background_image = panel_assets_handler.assets_loader.get_object(
-            level_object_name, asset_types.BACKGROUND
+        panel_assets_handler.background_image = panel_assets_handler.assets_loader.get_asset(
+            asset_types.BACKGROUND, level_object_name
         )
-        panel_assets_handler.music = panel_assets_handler.assets_loader.get_object(
-            level_object_name, asset_types.MUSIC
+        panel_assets_handler.music = panel_assets_handler.assets_loader.get_asset(
+            asset_types.MUSIC, level_object_name
         )
     end
 
@@ -42,6 +42,10 @@ function panel_assets_handler_class.construct(level_object_name)
         end
     end
 
+    function panel_assets_handler.__load_background_image()
+
+    end
+    
     panel_assets_handler.__init__()
     return panel_assets_handler
 end
