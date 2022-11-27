@@ -7,16 +7,14 @@ local visualizer = require "visualizer"
 local main_menu_panel_class = {}
 
 local START_GAME_TEXT = "Play"
-local SETTINGS_TEXT = "Settings"
 local QUIT_TEXT = "Quit game"
-local SELECTION_MENU_ITEMS = {START_GAME_TEXT, SETTINGS_TEXT, QUIT_TEXT}
-local TITLE_TEXT = "Space invaders"
+local SELECTION_MENU_ITEMS = {START_GAME_TEXT, QUIT_TEXT}
+local TITLE_TEXT = "Space Invaders"
 
 function main_menu_panel_class.construct(panel_id)
     local main_menu_panel = panel.construct(panel_id)
 
     function main_menu_panel.__init__()
-        main_menu_panel.assets_handler = assets_handler.construct("level_1")
         main_menu_panel.selection_menu = selection_menu.construct(
             SELECTION_MENU_ITEMS, main_menu_panel.on_selection
         )
@@ -28,7 +26,6 @@ function main_menu_panel_class.construct(panel_id)
     end
 
     function main_menu_panel.draw()
-        main_menu_panel.assets_handler.draw_background()
         main_menu_panel.visualizer.draw_title(TITLE_TEXT)
         main_menu_panel.selection_menu.draw()
     end

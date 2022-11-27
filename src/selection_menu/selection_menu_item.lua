@@ -17,9 +17,9 @@ function selection_menu_item.construct(text, x_coord, y_coord)
     item.color.blue = 1
 
     item.selected_color = {}
-    item.selected_color.red = 1
+    item.selected_color.red = 0.7
     item.selected_color.green = 0
-    item.selected_color.blue = 0
+    item.selected_color.blue = 1
     item.selected_color.alpha = 1
 
     function item.set_border(border_size)

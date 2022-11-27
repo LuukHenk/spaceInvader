@@ -1,7 +1,6 @@
 # SpaceInvader
 #### Version 0.1.0
 A simple spaceinvader game made with Lua Love.
-Background soundtrack by [Woodcuts](https://open.spotify.com/artist/7JZJe7QZ4vibeE55Xrm8X3?si=EvEK2wVYQOC-0AgSXWZ-rw)
 
 ## Quick start
 ### Requirements

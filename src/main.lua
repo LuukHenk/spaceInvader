@@ -1,4 +1,4 @@
-DEBUG = true
+DEBUG = false
 
 if DEBUG then
     love.window.setMode(1440, 810)
