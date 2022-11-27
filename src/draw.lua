@@ -1,7 +1,5 @@
 local draw = {}
 
-local font = love.graphics.getFont()
-
 function draw.draw_multiple_rectangles(objects)
     for _, object in pairs(objects) do
         draw.draw_rectangle(object)
@@ -25,7 +23,8 @@ function draw.draw_rectangle(object)
 end
 
 function draw.draw_panel_title(text)
-    local scaling_factor = 5
+    local font = love.graphics.getFont()
+    local scaling_factor = 1
     local x_coord = love.graphics.getWidth() * 0.5 - font:getWidth(text)*scaling_factor / 2
     local y_coord = love.graphics.getHeight() * 0.2 - font:getHeight() / 2
     love.graphics.setColor(1, 1, 1)
