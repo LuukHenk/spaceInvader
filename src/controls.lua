@@ -1,5 +1,5 @@
 local controls = {}
-
+controls.LEFT_MOUSE_BUTTON = 1
 function controls.__init__()
     controls.selection_menu_controls = controls.__construct_menu_controls()
     controls.game_panel_controls = controls.__construct_game_panel_controls()

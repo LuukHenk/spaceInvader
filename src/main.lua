@@ -1,4 +1,4 @@
-DEBUG = false
+DEBUG = true
 
 if DEBUG then    
     -- love.window.setFullscreen(true, 'desktop')
