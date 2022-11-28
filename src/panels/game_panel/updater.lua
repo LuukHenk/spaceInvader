@@ -7,6 +7,42 @@ function updater.update_game(dt, game)
     updater.check_if_game_over(game)
 end
 
+function updater.check_if_game_over(game)
+    if (
+        not game.object_handler.player
+        or updater.check_if_enemies_reached_earth(game.object_handler)
+    ) then
+        game.notification = notifications.GAME_LOST
+        updater.handle_game_over(game)
+    end
+end
+
+function updater.check_if_enemies_reached_earth(object_handler)
+    for _, enemy in pairs(object_handler.enemies) do
+        if enemy.coordinates.y + enemy.height > love.graphics.getHeight() then
+            object_handler.player.play_die_sound()
+            return true
+        end
+    end
+    return false
+end
+
+function updater.handle_game_over(game)
+    updater.reset_game(game)
+    game.next_active_panel = panel_ids.game_over_panel
+end
+
+function updater.reset_game(game)
+    game.object_handler.reset()
+end
+
+
+-----------------------
+
+
+
+
+
 function updater.update_game_objects(dt, object_handler)
     local all_objects = object_handler.get_all_objects()
     for _, object in pairs(all_objects) do
@@ -42,36 +78,6 @@ function updater.remove_if_dead(object, object_handler)
     end
 end
 
-function updater.check_if_game_over(game)
-    if (
-        not game.object_handler.player
-        or updater.check_if_enemies_reached_earth(game.object_handler)
-    ) then
-        game.notification = notifications.GAME_LOST
-        updater.handle_game_over(game)
-    end
-end
-
-function updater.check_if_enemies_reached_earth(object_handler)
-    for _, enemy in pairs(object_handler.enemies) do
-        if enemy.coordinates.y + enemy.height > love.graphics.getHeight() then
-            object_handler.player.play_die_sound()
-            return true
-        end
-    end
-    return false
-end
-
-
-function updater.handle_game_over(game)
-    updater.reset_game(game)
-    game.level_handler.reset()
-    game.next_active_panel = panel_ids.game_over_panel
-end
-
-function updater.reset_game(game)
-    game.object_handler.reset()
-end
 
 function updater.check_for_object_collision(object, target)
     if ((

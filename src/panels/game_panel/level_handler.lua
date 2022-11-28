@@ -12,7 +12,9 @@ function level_class.construct()
 
     function level_handler.select_active_level(enemies_alive)
         -- Returns false if the level selection failed
-        if not level_handler.__check_if_level_over(enemies_alive) then return true end
+        if not level_handler.__check_if_level_over(enemies_alive) then
+            return true
+        end
         local current_level_id = level_handler.current_level_id + 1
         local current_level = level_handler.level_factory.construct_level(
             current_level_id
@@ -51,6 +53,7 @@ function level_class.construct()
     end
 
     function level_handler.reset()
+        print("resetting level")
         if level_handler.current_level then
             level_handler.current_level.stop_music()
         else

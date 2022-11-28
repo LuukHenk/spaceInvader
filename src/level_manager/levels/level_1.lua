@@ -41,7 +41,7 @@ function level_1_class.construct(assets)
     -- table.insert(level_1.waves, wave.construct(0.3939, enemies))
 
     local enemies = {
-        level_object_spawner.construct(fat_enemy, 960, -fat_enemy.FAT_ENEMY_HEIGHT),
+        level_object_spawner.construct(basic_enemy, 960, -fat_enemy.FAT_ENEMY_HEIGHT),
     
     }
     table.insert(level_1.waves, wave.construct(0, enemies))
