@@ -2,10 +2,6 @@ local game_draw = {}
 
 function game_draw.draw_game(game_panel)
     game_draw.visualizer = game_panel.visualizer
-    if not game_panel.current_level then
-        return
-    end
-    game_panel.current_level.draw_background()
     game_draw.draw_objects(game_panel.object_handler.get_all_objects())
 end
 

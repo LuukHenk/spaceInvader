@@ -68,7 +68,7 @@ function visualizer_class.construct()
             image,
             object.coordinates.x,
             object.coordinates.y,
-            180,
+            0,
             ScreenWidhtScalingFactor,
             ScreenHeightScalingFactor
         )
