@@ -2,13 +2,8 @@ local controls = require "controls"
 local notifications = require "panel_manager.notifications"
 local panel_ids = require "panel_manager.panel_ids"
 local panel = require "panel_manager.panel"
-local visualizer = require "visualizer"
 local level_handler = require "panels.game_panel.level_handler"
 local game_object_handler = require "panels.game_panel.game_object_handler"
-
-local draw = require "panels.game_panel.draw"
-local updater = require "panels.game_panel.updater"
-local object_handler = require "panels.game_panel.object_handler"
 
 local game_panel_class = {}
 
@@ -16,7 +11,6 @@ function game_panel_class.construct(panel_id)
     local game_panel = panel.construct(panel_id)
 
     function game_panel.__init__()
-        game_panel.visualizer = visualizer.construct()
         game_panel.controls = controls.get_game_panel_controls()
         game_panel.game_object_handler = game_object_handler.construct(game_panel.controls)
         game_panel.level_handler = level_handler.construct()
