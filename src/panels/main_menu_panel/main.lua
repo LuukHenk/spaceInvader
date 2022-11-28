@@ -1,4 +1,4 @@
-local selection_menu = require "selection_menu.main"
+local selection_menu = require "selection_menu.selection_menu"
 local assets_handler = require "asset_handlers.panel_assets_handler"
 local panel_ids = require "panel_manager.panel_ids"
 local panel = require "panel_manager.panel"

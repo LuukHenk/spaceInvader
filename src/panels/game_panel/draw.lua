@@ -15,7 +15,7 @@ function game_draw.draw_objects(game_objects)
             game_draw.visualizer.draw_rectangle(object)
         end
         if object.assets and object.assets.get_sprite() then
-            game_draw.visualizer.draw_sprite(object.assets.get_sprite(), object)           
+            game_draw.visualizer.draw_sprite(object.assets.get_sprite(), object)
         else
             game_draw.visualizer.draw_rectangle(object)
         end

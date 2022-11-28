@@ -13,7 +13,7 @@ function player_class.construct(controls)
         love.graphics.getWidth() / 2,
         love.graphics.getHeight()
     )
-    player.resize(80, 25)
+    player.resize(50, 112)
     player.set_coordinates(
         player.coordinates.x - player.width / 2, 
         player.coordinates.y - player.height
