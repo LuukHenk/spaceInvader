@@ -4,8 +4,8 @@ local game_object_names = require "game_objects.game_object_names"
 local basic_enemy_bullet = require "game_objects.bullets.basic_enemy_bullet"
 local basic_enemy_class = {}
 
-basic_enemy_class.BASIC_ENEMY_WIDTH = 50
-basic_enemy_class.BASIC_ENEMY_HEIGHT = 50
+basic_enemy_class.BASIC_ENEMY_WIDTH = 60
+basic_enemy_class.BASIC_ENEMY_HEIGHT = 75
 function basic_enemy_class.construct(x_coord, y_coord)
     local enemy = shooting_object.construct(
         game_object_names.basic_enemy, object_types.enemy, x_coord, y_coord

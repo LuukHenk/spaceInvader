@@ -74,9 +74,9 @@ function game_object_handler_class.construct(player_controls)
 
     function game_object_handler.__construct_game_objects()
         local objects = {}
+        objects.bullets = {}
         objects.players = {game_object_handler.__construct_player()}
         objects.enemies = {}
-        objects.bullets = {}
         objects.other_objects = {}
         return objects
     end

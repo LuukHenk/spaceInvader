@@ -53,7 +53,6 @@ function level_class.construct()
     end
 
     function level_handler.reset()
-        print("resetting level")
         if level_handler.current_level then
             level_handler.current_level.stop_music()
         else
