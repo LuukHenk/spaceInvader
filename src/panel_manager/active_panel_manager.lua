@@ -12,6 +12,7 @@ function active_panel_manager.load()
     active_panel_manager.active_panel = active_panel_manager.panel_factory.get_panel(
         default_active_panel
     )
+    active_panel_manager.active_panel.on_activation(default_active_panel)
     local loading_time = love.timer.getTime() - start_time
     if DEBUG then
         local dbg_text = "Loaded all panels (" .. loading_time .. "s)"

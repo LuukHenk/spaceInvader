@@ -15,7 +15,7 @@ function fat_enemy_class.construct(x_coord, y_coord)
     )
 
     enemy.resize(fat_enemy_class.FAT_ENEMY_WIDTH, fat_enemy_class.FAT_ENEMY_HEIGHT)
-    enemy.set_color(0.5, 1, 1, 1)
+    enemy.set_color(1, 1, 1, 1)
     enemy.lives = fat_enemy_class.LIVES
     enemy.speed = 80
     enemy.bullet = basic_enemy_bullet
@@ -26,12 +26,7 @@ function fat_enemy_class.construct(x_coord, y_coord)
     function enemy.update(dt)
         enemy.__move(dt)
         enemy.shoot(dt)
-        -- enemy.__update_color()
         enemy.__update_shooting_cooldown_time()
-    end
-
-    function enemy.__update_color()
-        enemy.color.red = 1-enemy.lives / fat_enemy_class.LIVES + 0.5
     end
 
     function enemy.__update_shooting_cooldown_time()
