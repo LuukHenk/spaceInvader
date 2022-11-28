@@ -6,13 +6,23 @@ Created the basic game.
 
 Reworked the whole engine of the basic game.
 
+## Changes
+
+- Completely new engine
+- Enemies move a bit more now
+- New boss
+
+
 # Later
 
 1. (Improvement) - Make the bullets bigger
 2. (Improvement) - Make the user smaller
 8. (Improvement) - Test everything
-5. (Feature) - Add mouse selection in menus
+9. (Improvement) - Rework the main function
+10. (Feature) - Add main panel music
+11. (Feature) - Add main panel background
+12. (Feature) - Add pause panel background
+13. (Feature) - Add game over panel background
 3. (Feature) - Let the user dash
 4. (Feature) - Give the user more lives and display lives
 6. (Feature) - Add score
-9. (Improvement) - Rework the main function
