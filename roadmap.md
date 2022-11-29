@@ -36,6 +36,11 @@ Created the basic game.
 12. (Feature) - Add pause panel background
 13. (Feature) - Add game over panel background
 ### Player updates
+24. (Feature) - Add jumping (Blocked by #23)
 3. (Feature) - Add dash
 4. (Feature) - Give the player more lives and display lives
 6. (Feature) - Add score
+### Game updates
+22. (Invest) - Check if love.physics is nice.
+25. (Feature) - Implement love.physics (Blocked by #22)
+23. (Feature) - Implement gravity (Blocked by #25)
